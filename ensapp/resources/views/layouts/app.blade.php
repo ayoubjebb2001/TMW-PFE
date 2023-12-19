@@ -72,8 +72,8 @@
           
 
             <li class="flex items-center justify-evenly">
-              <i class='bx bx-envelope mr-4 text-3xl'></i>
-              <img src="{{ asset('images/7639fc698aca9f779fd6332a5c501015.png') }}" alt="" class="w-[45px] rounded-full">
+              <i class='bx bx-envelope mr-4 text-3xl cursor-pointer'></i>
+              <img src="{{ asset('images/7639fc698aca9f779fd6332a5c501015.png') }}" alt="" class="w-[45px] rounded-full cursor-pointer">
             </li>
 
               
