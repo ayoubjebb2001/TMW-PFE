@@ -56,10 +56,10 @@
 
     
 
-    <div class="xl:w-[85%] ml-[15%]">
+    <div class="xl:w-[85%] ml-[15%] px-12">
 
       @section('navbar')
-        <nav class="py-6 px-12">
+        <nav class="py-6">
           <ul class="flex items-center justify-between">
             <li>
               <h1 class="text-4xl font-semibold">Dashboard</h1>
@@ -72,7 +72,7 @@
           
 
             <li class="flex items-center justify-evenly">
-              <i class='bx bxs-envelope' ></i>
+              <i class='bx bx-envelope mr-3 text-3xl'></i>
               <img src="{{ asset('images/7639fc698aca9f779fd6332a5c501015.png') }}" alt="" class="w-[45px] rounded-full">
             </li>
 
