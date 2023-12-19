@@ -54,8 +54,35 @@
       </aside>
     @show
 
+    
+
     <div class="xl:w-[85%] ml-[15%]">
-        @yield('content')
+
+      @section('navbar')
+        <nav class="py-6 px-12">
+          <ul class="flex items-center justify-between">
+            <li>
+              <h1 class="text-4xl font-semibold">Dashboard</h1>
+            </li>
+
+            <li class="relative">
+              <input type="search" name="" id="" class="rounded-xl py-2 pl-16 pr-4 w-full focus:outline-none focus:border-orange-500 transition duration-300">
+              <i class="bx bx-search absolute top-1/2 transform -translate-y-1/2 left-4 text-orange-500 text-lg"></i>
+          </li>
+          
+
+            <li class="flex items-center justify-evenly">
+              <i class='bx bxs-envelope' ></i>
+              <img src="{{ asset('images/7639fc698aca9f779fd6332a5c501015.png') }}" alt="" class="w-[45px] rounded-full">
+            </li>
+
+              
+          </ul>
+        </nav>
+      @show
+
+      @yield('content')
+
     </div>
 
   </div>
