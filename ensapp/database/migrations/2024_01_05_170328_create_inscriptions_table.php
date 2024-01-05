@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('inscriptions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')->constrained('students');
-            $table->foreignId('filiere_id')->constrained('filiere');
+            $table->unsignedBigInteger('student_id');
+            $table->unsignedBigInteger('filiere_id');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
+            $table->foreign('filiere_id')->references('id')->on('filieres')->onDelete('cascade');
+
             $table->enum('Status', ['Accepted', 'Refused', 'Pinned']);
             $table->integer('Bac_note');
             $table->integer('Deplome');

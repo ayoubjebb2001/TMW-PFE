@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('department_chifs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('teacher_id')->primary()->constrained('teachers');
+            $table->unsignedBigInteger('teacher_id');
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
             $table->timestamps();
         });
     }
