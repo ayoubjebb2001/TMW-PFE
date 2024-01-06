@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('Description');
             $table->string('Duration');
             $table->foreign('filiere_id')->references('id')->on('filieres')->onDelete('cascade');
+            $table->unsignedBigInteger('teacher_id');
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->string('Name');
-            $table->string('Email');
-            $table->string('Phone_number');
+            $table->unsignedBigInteger('filiere_id')->nullable();
+            $table->foreign('filiere_id')->references('id')->on('filiere')->onDelete('cascade');
             $table->timestamps();
         });
     }
