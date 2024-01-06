@@ -18,7 +18,7 @@ use App\Http\Controllers\TeacherController;
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('dashboard');
 
 // Show register Teacher Form
 Route::get('/teacher/create', [TeacherController::class, 'create'])->name('teacher.create');

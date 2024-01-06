@@ -22,12 +22,19 @@
         <ul class="text-xs my-2 ">
         
           <li class="cursor-pointer my-1 py-1 px-6 bg-orange-500 mx-6 rounded-lg text-left">
-            <a href="" class="font-semibold flex items-center justify-start">
+            <a href="{{ route('dashboard') }}" class="font-semibold flex items-center justify-start">
               <i class="bx bx-pie-chart-alt-2 text-2xl mr-2 "></i>
               <span>Dashboard</span>
             </a>
           </li>
           
+          <li class="cursor-pointer my-1 py-1 px-6 hover:bg-orange-500 mx-6 rounded-lg transition ease-in-out duration-500">
+            <a href="{{ route('teacher.index') }}" class="font-semibold flex items-center justify-start">
+              <i class="bx bx-user-check text-2xl mr-2 "></i>
+              <span>Teachers</span>
+            </a>
+          </li>
+
           <li class="cursor-pointer my-1 py-1 px-6 hover:bg-orange-500 mx-6 rounded-lg transition ease-in-out duration-500">
             <a href="" class="font-semibold flex items-center justify-start">
               <i class="bx bx-user-check text-2xl mr-2 "></i>
