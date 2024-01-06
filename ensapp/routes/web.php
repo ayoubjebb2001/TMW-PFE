@@ -39,3 +39,5 @@ Route::resource('/teacher', TeacherController::class)->names([
 
 Route::get('/teacher/create', [TeacherController::class, 'create'])->name('teacher.create');
 
+Route::get('/teacher/edit', [TeacherController::class, 'edit'])->name('teacher.edit');
+
