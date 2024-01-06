@@ -5,7 +5,7 @@
  
 @section('content')
 
-<form action="" method="post" class="max-w-md mx-auto mt-8 bg-white p-8 rounded shadow-md">
+<form action="/student" method="post" class="max-w-md mx-auto mt-8 bg-white p-8 rounded shadow-md">
     <div class="mb-4">
         <label for="first_name" class="block text-gray-700 text-sm font-bold mb-2">First Name</label>
         <input type="text" name="first_name" id="first_name" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
@@ -36,7 +36,7 @@
     </div>
 
     <div class="text-center text-sm">
-        <p>Already have an account? <a href="{{ route('students.signin') }}" class="text-orange-500 hover:underline">Sign in</a></p>
+        <p>Already have an account? <a href="{{ route('student.signin') }}" class="text-orange-500 hover:underline">Sign in</a></p>
     </div>
 
 </form>
