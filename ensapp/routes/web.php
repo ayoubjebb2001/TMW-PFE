@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('dashboard');
 
 Route::get('/student/signup', function () {
     return view('students.signup');
@@ -24,3 +25,11 @@ Route::get('/student/signup', function () {
 Route::get('/student/signin', function () {
     return view('students.signin');
 })->name('students.signin');
+
+Route::get('/teacher', function () {
+    return view('students.signin');
+})->name('teacher.index');
+
+Route::resource('/teacher', TeacherController::class)->names([
+    'index' => 'teacher.index'
+]);;
