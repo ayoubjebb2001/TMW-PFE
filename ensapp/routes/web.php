@@ -30,6 +30,12 @@ Route::get('/teacher', function () {
     return view('students.signin');
 })->name('teacher.index');
 
+
+// Teachers Routes:
+
 Route::resource('/teacher', TeacherController::class)->names([
     'index' => 'teacher.index'
-]);;
+]);
+
+Route::get('/teacher/create', [TeacherController::class, 'create'])->name('teacher.create');
+
