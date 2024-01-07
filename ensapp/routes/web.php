@@ -20,6 +20,8 @@ Route::get('/', function () {
     return view('index');
 })->name('dashboard');
 
+// show all teachers
+Route::get('/teacher',[TeacherController::class , 'index'])->name('teacher.index');
 // Show register Teacher Form
 Route::get('/teacher/create', [TeacherController::class, 'create'])->name('teacher.create');
 
