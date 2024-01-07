@@ -10,53 +10,39 @@
 
   @vite('resources/css/app.css')
 </head>
-<body class="bg-slate-100">
+<body class="bg-white">
 
   <div class="w-full mx-auto flex">
 
     @section('sidebar')
-      <aside class="bg-stone-900 xl:w-[15%] rounded-s-md w-16 h-screen text-center xl:items-end fixed text-white">
+      <aside class="bg-sky-400 xl:w-[15%] rounded-s-md w-16 h-screen text-center xl:items-end fixed text-white">
 
-        <h1 class="bg-stone-900 px-4 py-8 xl:text-xl font-bold text-center">ENSapp</h1>
+        <h1 class="bg-sky-400 px-4 py-8 xl:text-xl font-bold text-center">ENSapp</h1>
 
         <ul class="text-xs my-2 ">
         
-          <li class="cursor-pointer my-1 py-1 px-6 bg-orange-500 mx-6 rounded-lg text-left">
+          <li class="cursor-pointer my-1 py-1 px-6 bg-sky-500 mx-6 rounded-lg text-left">
             <a href="{{ route('dashboard') }}" class="font-semibold flex items-center justify-start">
               <i class="bx bx-pie-chart-alt-2 text-2xl mr-2 "></i>
-              <span>Dashboard</span>
-            </a>
-          </li>
-          
-          <li class="cursor-pointer my-1 py-1 px-6 hover:bg-orange-500 mx-6 rounded-lg transition ease-in-out duration-500">
-            <a href="{{ route('teacher.index') }}" class="font-semibold flex items-center justify-start">
-              <i class="bx bx-user-check text-2xl mr-2 "></i>
-              <span>Teachers</span>
+              <span>Home</span>
             </a>
           </li>
 
-          <li class="cursor-pointer my-1 py-1 px-6 hover:bg-orange-500 mx-6 rounded-lg transition ease-in-out duration-500">
-            <a href="{{ route('inscription.index') }}" class="font-semibold flex items-center justify-start">
+          <li class="cursor-pointer my-1 py-1 px-6 hover:bg-sky-500 mx-6 rounded-lg transition ease-in-out duration-500">
+            <a href="" class="font-semibold flex items-center justify-start">
               <i class="bx bx-user-check text-2xl mr-2 "></i>
               <span>Inscriptions</span>
             </a>
           </li>
           
-          <li class="cursor-pointer my-1 py-1 px-6 hover:bg-orange-500 mx-6 rounded-lg transition ease-in-out duration-500">
-            <a href="{{ route('filiere.index') }}" class="font-semibold flex items-center justify-start">
-              <i class="bx bxs-component text-2xl mr-2 "></i>
-              <span>Filieres</span>
-            </a>
-          </li>
-          
-          <li class="cursor-pointer my-1 py-1 px-6 hover:bg-orange-500 mx-6 rounded-lg transition ease-in-out duration-500">
-            <a href="{{ route('module.index') }}" class="font-semibold flex items-center justify-start">
+          <li class="cursor-pointer my-1 py-1 px-6 hover:bg-sky-500 mx-6 rounded-lg transition ease-in-out duration-500">
+            <a href="" class="font-semibold flex items-center justify-start">
               <i class="bx bx-book text-2xl mr-2 "></i>
               <span class="">Modules</span>
             </a>
           </li>
           
-          <li class="cursor-pointer my-1 py-1 px-6 hover:bg-orange-500 mx-6 rounded-lg transition ease-in-out duration-500">
+          <li class="cursor-pointer my-1 py-1 px-6 hover:bg-sky-500 mx-6 rounded-lg transition ease-in-out duration-500">
             <a href="" class="font-semibold flex items-center justify-start">
               <i class="bx bx-book text-2xl mr-2 "></i>
               <span class="">calendar</span>
@@ -70,10 +56,10 @@
 
     
 
-    <div class="xl:w-[85%] ml-[15%] px-4">
+    <div class="xl:w-[85%] ml-[15%]">
 
       @section('navbar')
-        <nav class="py-6 px-12">
+        <nav class="w-full py-6 px-12 bg-sky-50 shadow-md">
           <ul class="flex items-center justify-between">
             <li>
               <h1 class="text-4xl font-semibold">Dashboard</h1>

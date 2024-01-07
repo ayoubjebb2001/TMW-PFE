@@ -23,7 +23,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        return view('teacher.signup');
+        return view('teacher.create');
     }
 
     /**
