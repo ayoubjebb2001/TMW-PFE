@@ -29,7 +29,7 @@ Route::get('/teacher', [TeacherController::class, 'index'])->name('teacher.index
 Route::get('/teacher/create', [TeacherController::class, 'create'])->name('teacher.create');
 
 // Store Teacher Data
-Route::post('/teacher/store', [TeacherController::class, 'store']);
+Route::post('/teacher/store', [TeacherController::class, 'store'])->name('teacher.store');
 
 // Show Teacher Login form 
 Route::get('/teacher/signin', [TeacherController::class,'login'])->name('teacher.login')->middleware('guest');
