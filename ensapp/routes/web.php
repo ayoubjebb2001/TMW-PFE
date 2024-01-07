@@ -14,15 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/dashboard', function () {
     return view('index');
 })->name('dashboard');
 
-Route::get('/student/signup', function () {
+Route::get('/', function () {
+    return view('students.index');
+})->name('home');
+
+Route::get('signup', function () {
     return view('students.signup');
 })->name('students.signup');
 
-Route::get('/student/signin', function () {
+Route::get('signin', function () {
     return view('students.signin');
 })->name('students.signin');
 
