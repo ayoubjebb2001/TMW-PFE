@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,29 +21,48 @@ Route::get('/dashboard', function () {
 })->name('dashboard');
 
 Route::get('/', function () {
-    return view('students.index');
+    return view('student.index');
 })->name('home');
 
-Route::get('signup', function () {
-    return view('students.signup');
-})->name('students.signup');
-
-Route::get('signin', function () {
-    return view('students.signin');
-})->name('students.signin');
-
-Route::get('/teacher', function () {
-    return view('students.signin');
-})->name('teacher.index');
-
-
-// Teachers Routes:
-
-Route::resource('/teacher', TeacherController::class)->names([
-    'index' => 'teacher.index'
-]);
 
 Route::get('/teacher/create', [TeacherController::class, 'create'])->name('teacher.create');
 
-Route::get('/teacher/edit', [TeacherController::class, 'edit'])->name('teacher.edit');
+// Store Teacher Data
+Route::post('/teacher', [TeacherController::class, 'store']);
 
+// Show Teacher Login form 
+Route::get('/teacher/signin', [TeacherController::class,'login'])->name('teacher.login')->middleware('guest');
+
+// Show Edit Teacher Form
+Route::get('/teacher/{teacher}/edit', [TeacherController::class, 'edit'])->middleware('auth');
+
+// Update Teacher
+Route::put('/teacher/{teacher}', [TeacherController::class, 'update'])->middleware('auth');
+
+// Delete Teacher
+Route::delete('/teacher/{teacher}', [TeacherController::class, 'destroy'])->middleware('auth');
+
+ 
+// Log User Out
+Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
+
+// Log In User
+Route::post('/authenticate', [UserController::class, 'authenticate']);
+
+// Show register student Form
+Route::get('/student/create', [StudentController::class, 'create'])->name('student.signup');
+
+// Store student Data
+Route::post('/student', [StudentController::class, 'store']);
+
+// Show student Login form 
+Route::get('/student/signin', [StudentController::class,'login'])->name('student.login')->middleware('guest');
+
+// Show Edit student Form
+Route::get('/student/{student}/edit', [StudentController::class, 'edit'])->middleware('auth');
+
+// Update student
+Route::put('/student/{student}', [StudentController::class, 'update'])->middleware('auth');
+
+// Delete student
+Route::delete('/student/{student}', [StudentController::class, 'destroy'])->middleware('auth');

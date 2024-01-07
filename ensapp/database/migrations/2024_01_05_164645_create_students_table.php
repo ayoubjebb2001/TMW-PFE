@@ -12,10 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('students', function (Blueprint $table) {
-            $table->id();
-            $table->string('Name');
-            $table->string('Email');
-            $table->string('Phone_number');
+            $table->id('student_id');
+            $table->foreignId('user_id')->constrained('users','user_id')->onDelete('cascade');
             $table->timestamps();
         });
     }

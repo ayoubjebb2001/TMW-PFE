@@ -5,9 +5,7 @@
  
 @section('content')
 
-<form action="" method="post" class="max-w-md mx-auto mt-40 bg-white p-8 rounded shadow-md">
-
-    <h1 class="mx-auto text-center font-extrabold text-2xl mb-8">Login to your account</h1>
+<form action="/authenticate" method="post" class="max-w-md mx-auto mt-20 bg-white p-8 rounded shadow-md">
 
     <div class="mb-4">
         <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
@@ -24,7 +22,7 @@
     </div>
 
     <div class="text-center text-sm">
-        <p>Don't have an account? <a href="{{ route('students.signup') }}" class="text-orange-500 hover:underline">Sign up</a></p>
+        <p>Don't have an account? <a href="{{ route('student.signup') }}" class="text-orange-500 hover:underline">Sign up</a></p>
     </div>
 
 </form>
