@@ -17,7 +17,7 @@ use App\Http\Controllers\TeacherController;
 */
 
 Route::get('/dashboard', function () {
-    return view('index');
+    return view('dashboard');
 })->name('dashboard');
 
 Route::get('/', function () {
