@@ -70,7 +70,7 @@
 
     
 
-    <div class="xl:w-[85%] ml-[15%]">
+    <div class="xl:w-[85%] ml-[15%] px-4">
 
       @section('navbar')
         <nav class="py-6 px-12">
