@@ -59,7 +59,7 @@
     <div class="xl:w-[85%] ml-[15%]">
 
       @section('navbar')
-        <nav class="w-full py-6 px-12 bg-sky-50">
+        <nav class="w-full py-6 px-12 bg-sky-50 shadow-md">
           <ul class="flex items-center justify-between">
             <li>
               <h1 class="text-4xl font-semibold">Dashboard</h1>

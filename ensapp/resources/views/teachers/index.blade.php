@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <button class="bg-gray-50 dark:bg-gray-700 py-2 px-8 rounded-sm"><a class="dark:text-slate-300 text-gray-700" href="">Add new teacher</a></button>
+        <button class="bg-gray-50 dark:bg-gray-700 py-2 px-8 rounded-sm"><a class="dark:text-slate-300 text-gray-700" href="{{ route('teacher.create') }}">Add new teacher</a></button>
 
     </div>
 
