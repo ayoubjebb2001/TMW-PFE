@@ -22,7 +22,8 @@
     </div>
 
     <div class="text-center text-sm">
-        <p>Don't have an account? <a href="{{ route('student.signup') }}" class="text-orange-500 hover:underline">Sign up</a></p>
+        <p>Don't have a student account? <a href="{{ route('student.signup') }}" class="text-orange-500 hover:underline">Sign up</a></p>
+        <p>Don't have a teacher account? <a href="{{ route('teacher.signup') }}" class="text-orange-500 hover:underline">Sign up</a></p>
     </div>
 
 </form>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CourseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FiliereController;
@@ -7,6 +8,11 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\InscriptionController;
 use App\Http\Controllers\ModuleController;
+use App\Models\Filiere;
+use App\Models\Inscription;
+use App\Models\Module;
+use App\Models\Student;
+use App\Models\Teacher;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,64 +25,20 @@ use App\Http\Controllers\ModuleController;
 |
 */
 
-Route::get('/dashboard', function () {
+Route::get('/', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('/', function () {
-    return view('student.index');
-})->name('home');
 
-// Show all teachers
-Route::get('/teacher', [TeacherController::class, 'index'])->name('teacher.index');
-
-Route::get('/teacher/create', [TeacherController::class, 'create'])->name('teacher.create');
-
-// Store Teacher Data
-Route::post('/teacher/store', [TeacherController::class, 'store'])->name('teacher.store');
-
-// Show Teacher Login form 
-Route::get('/teacher/signin', [TeacherController::class,'login'])->name('teacher.login')->middleware('guest');
-
-// Show Edit Teacher Form
-Route::get('/teacher/{teacher}/edit', [TeacherController::class, 'edit'])->middleware('auth');
-
-// Update Teacher
-Route::put('/teacher/{teacher}', [TeacherController::class, 'update'])->middleware('auth');
-
-// Delete Teacher
-Route::delete('/teacher/{teacher}', [TeacherController::class, 'destroy'])->middleware('auth');
-
- 
-// Log User Out
-Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
-
-// Log In User
-Route::post('/authenticate', [UserController::class, 'authenticate']);
-
-// Show register student Form
-Route::get('/student/create', [StudentController::class, 'create'])->name('student.signup');
-
-// Store student Data
-Route::post('/student', [StudentController::class, 'store']);
-
-// Show student Login form 
-Route::get('/student/signin', [StudentController::class,'login'])->name('student.login')->middleware('guest');
-
-// Show Edit student Form
-Route::get('/student/{student}/edit', [StudentController::class, 'edit'])->middleware('auth');
-
-// Update student
-Route::put('/student/{student}', [StudentController::class, 'update'])->middleware('auth');
-
-// Delete student
-Route::delete('/student/{student}', [StudentController::class, 'destroy'])->middleware('auth');
-
-// Show all students inscriptions 
-Route::get('/inscription', [InscriptionController::class, 'index'])->name('inscription.index');
-
-// Show all filieres
-Route::get('/filiere', [FiliereController::class, 'index'])->name('filiere.index');
-
-//Show all modules
-Route::get('/module', [ModuleController::class, 'index'])->name('module.index');
+Route::resource('user', UserController::class);
+Route::resource('module', ModuleController::class);
+Route::resource('course',CourseController::class);
+Route::resource('inscription', InscriptionController::class);
+Route::resource('filiere', FiliereController::class);
+Route::get('/login', [UserController::class,'login'])->name('login');
+Route::post('/login', [UserController::class,'authenticate'])->name('authenticate');
+Route::get('/teacher/signup',[TeacherController::class,'signup'])->name('teacher.signup');
+Route::get('/student/signup',[StudentController::class,'signup'])->name('student.signup');
+Route::get('/logout', [userController::class,'logout'])->name('logout')->middleware('auth');
+Route::resource('teacher', TeacherController::class);
+Route::resource('student',StudentController::class);

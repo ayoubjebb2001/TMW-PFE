@@ -126,5 +126,11 @@ class TeacherController extends Controller
     {
         //
     }
-
+    
+    /**
+     * show signup form for teacher
+     */
+    public function signup(){
+        return view('teacher.signup');
+    }
 }

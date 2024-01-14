@@ -8,7 +8,7 @@
 
 
     <h1 class="text-3xl font-semibold">
-        Welcome StudentName
+        Welcome Professeur ...
     </h1>
 
     <h4 class="mt-8 mb-2 text-xl">inscriptions list</h4>

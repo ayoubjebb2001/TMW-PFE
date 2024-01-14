@@ -62,4 +62,11 @@ class StudentController extends Controller
     {
         //
     }
+
+    /**
+     * Show the sign up form
+     */
+    public function signup(){
+        return view('student.signup');
+    }
 }
