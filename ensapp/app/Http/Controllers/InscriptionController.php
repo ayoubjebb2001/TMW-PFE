@@ -12,7 +12,7 @@ class InscriptionController extends Controller
      */
     public function index()
     {
-        //
+        return view('inscription.index');
     }
 
     /**

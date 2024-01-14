@@ -12,7 +12,7 @@ class FiliereController extends Controller
      */
     public function index()
     {
-        //
+        return view('filiere.index');
     }
 
     /**

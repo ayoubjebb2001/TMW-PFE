@@ -2,8 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FiliereController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\InscriptionController;
+use App\Http\Controllers\ModuleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +27,7 @@ Route::get('/', function () {
     return view('student.index');
 })->name('home');
 
+// Show all teachers
 Route::get('/teacher', [TeacherController::class, 'index'])->name('teacher.index');
 
 Route::get('/teacher/create', [TeacherController::class, 'create'])->name('teacher.create');
@@ -67,3 +71,12 @@ Route::put('/student/{student}', [StudentController::class, 'update'])->middlewa
 
 // Delete student
 Route::delete('/student/{student}', [StudentController::class, 'destroy'])->middleware('auth');
+
+// Show all students inscriptions 
+Route::get('/inscription', [InscriptionController::class, 'index'])->name('inscription.index');
+
+// Show all filieres
+Route::get('/filiere', [FiliereController::class, 'index'])->name('filiere.index');
+
+//Show all modules
+Route::get('/module', [ModuleController::class, 'index'])->name('module.index');
