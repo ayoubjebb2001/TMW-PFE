@@ -12,17 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('inscriptions', function (Blueprint $table) {
-            $table->id('inscription_id');
-            $table->unsignedBigInteger('student_id');
-            $table->unsignedBigInteger('filiere_id');
-            $table->foreign('student_id')->references('student_id')->on('students')->onDelete('cascade');
-            $table->foreign('filiere_id')->references('filiere_id')->on('filieres')->onDelete('cascade');
-
-            $table->enum('Status', ['Accepted', 'Refused', 'Pinned']);
-            $table->integer('Bac_note');
-            $table->integer('Deplome');
-            $table->year('Deplome_year');
-            $table->integer('Deplome_note');
+            $table->id();
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('filiere_id')->constrained('filieres');
+            $table->enum('status', ['Accepted', 'Refused', 'Pinned']);
+            $table->integer('bac_note');
+            $table->integer('deplome');
+            $table->year('deplome_year');
+            $table->integer('deplome_note');
+            $table->text('files');
             $table->timestamps();
         });
     }

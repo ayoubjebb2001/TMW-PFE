@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
+use App\Models\User;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
 {
@@ -12,7 +16,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        return view("student.index");
     }
 
     /**
@@ -20,7 +24,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        //
+        return view("student.signup");
     }
 
     /**
@@ -28,8 +32,41 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $validatedData = $request->validate([
+            'lastname' => 'required|string',
+            'name' => 'required|string',
+            'phone' => 'required|string',
+            'email' => 'required|email|unique:users,email',
+            'CIN' => 'required|unique:users,cin',
+            'password' => 'required|string',
+        ]);
+        
+        // Create a new user
+        $user = User::create([
+            'prenom' => $validatedData['name'],
+            'nom' => $validatedData['lastname'],
+            'phone' => $validatedData['phone'],
+            'email' => $validatedData['email'],
+            'CIN' => $validatedData['CIN'],
+            'password' => Hash::make($validatedData['password']),
+        ]);
+
+        // Create a new student associated with the user
+        Role::create([
+            'Specialization' => 'student',
+            'user_id' => $user->id,
+            'role_name' => 'student',
+        ]);
+
+        
+        // Login the new created user
+        Auth::login($user);
+
+        // Redirect or return a response
+        return redirect()->route('student.index')->with('success', 'Student registered successfully');
     }
+
 
     /**
      * Display the specified resource.

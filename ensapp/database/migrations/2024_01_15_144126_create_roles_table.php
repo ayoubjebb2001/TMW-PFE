@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('department_chifs', function (Blueprint $table) {
-            $table->id('depart_chief_id');
-            $table->unsignedBigInteger('teacher_id');
-            $table->foreign('teacher_id')->references('teacher_id')->on('teachers')->onDelete('cascade');
+        Schema::create('roles', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained('users');
+            $table->enum('role_name', ['teacher', 'student', 'chef']);
+            $table->string('Specialization');
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('department_chifs');
+        Schema::dropIfExists('roles');
     }
 };

@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('modules', function (Blueprint $table) {
-            $table->id('module_id');
-            $table->string('Module_name');
-            $table->string('Description');
-            $table->string('Duration');
-            $table->foreignId('filiere_id')->constrained('filieres','filiere_id')->onDelete('cascade');
-            $table->foreignId('teacher_id')->constrained('teachers','teacher_id')->onDelete('cascade');
+            $table->id();
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('filiere_id')->constrained('filieres');
+            $table->string('module_name');
+            $table->string('description');
+            $table->string('duration');
             $table->timestamps();
         });
     }

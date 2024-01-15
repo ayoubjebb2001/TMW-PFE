@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
@@ -33,30 +34,38 @@ class TeacherController extends Controller
     {
         // Validate the incoming request data
         $request->validate([
-            'prenom' => 'required|string',
-            'nom' => 'required|string',
-            'Phone' => 'required|string',
+            'lastname' => 'required|string',
+            'name' => 'required|string',
+            'phone' => 'required|string',
             'email' => 'required|email|unique:users,email',
+            'cin' => 'required|unique:users,cin',
             'password' => 'required|string',
-            'Specialization' => 'required|string',
+            'specialization' => 'required|string',
         ]);
+
+        // dd($request);
 
         // Create a new user
         $user = User::create([
-            'prenom' => $request->input('prenom'),
-            'nom' => $request->input('nom'),
-            'Phone' => $request->input('Phone'),
+            'prenom' => $request->input('name'),
+            'nom' => $request->input('lastname'),
+            'phone' => $request->input('phone'),
             'email' => $request->input('email'),
+            'CIN' => $request->input('cin'),
             'password' => Hash::make($request->input('password')),
         ]);
 
+
         // Create a new teacher associated with the user
-        $teacher = Teacher::create([
-            'Specialization' => $request->input('Specialization'),
-            'user_id' => $user->user_id,
+        Role::create([
+            'Specialization' => $request->input('specialization'),
+            'user_id' => $user->id,
+            'role_name' => 'teacher',
         ]);
         
         //Login the new created user
+
+        
 
         Auth::login($user);
         

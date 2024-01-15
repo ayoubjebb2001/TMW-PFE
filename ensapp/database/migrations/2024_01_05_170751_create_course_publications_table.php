@@ -12,12 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('course_publications', function (Blueprint $table) {
-            $table->id('course_pub_id');
-            $table->unsignedBigInteger('teacher_id');
-            $table->unsignedBigInteger('course_id');
-            $table->foreign('teacher_id')->references('teacher_id')->on('teachers')->onDelete('cascade');
-            $table->foreign('course_id')->references('course_id')->on('courses')->onDelete('cascade');
-
+            $table->id();
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('course_id')->constrained('courses');
+            $table->text('course_file');
             $table->timestamp('Publish_date');
             $table->timestamps();
         });

@@ -5,15 +5,18 @@
  
 @section('content')
 
-<form action="/student" method="post" class="max-w-md mx-auto mt-8 bg-white p-8 rounded shadow-md">
+<form action="{{ route('student.store') }}" method="post" class="max-w-md mx-auto mt-8 bg-white p-8 rounded shadow-md">
+
+    @csrf
+
     <div class="mb-4">
         <label for="first_name" class="block text-gray-700 text-sm font-bold mb-2">First Name</label>
-        <input type="text" name="first_name" id="first_name" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+        <input type="text" name="name" id="name" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
     </div>
 
     <div class="mb-4">
         <label for="last_name" class="block text-gray-700 text-sm font-bold mb-2">Last Name</label>
-        <input type="text" name="last_name" id="last_name" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+        <input type="text" name="lastname" id="lastname" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
     </div>
 
     <div class="mb-4">
@@ -22,13 +25,18 @@
     </div>
 
     <div class="mb-4">
-        <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-        <input type="password" name="password" id="password" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+        <label for="cin" class="block text-gray-700 text-sm font-bold mb-2">CIN</label>
+        <input type="text" name="CIN" id="CIN" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
     </div>
 
-    <div class="mb-6">
-        <label for="confirm_password" class="block text-gray-700 text-sm font-bold mb-2">Confirm Password</label>
-        <input type="password" name="confirm_password" id="confirm_password" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+    <div class="mb-4">
+        <label for="phone" class="block text-gray-700 text-sm font-bold mb-2">Phone</label>
+        <input type="text" name="phone" id="phone" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+    </div>
+
+    <div class="mb-4">
+        <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+        <input type="password" name="password" id="password" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
     </div>
 
     <div class="mb-6">

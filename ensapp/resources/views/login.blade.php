@@ -5,8 +5,10 @@
  
 @section('content')
 
-<form action="/authenticate" method="post" class="max-w-md mx-auto mt-20 bg-white p-8 rounded shadow-md">
+<form action="{{ route('authenticate') }}" method="post" class="max-w-md mx-auto mt-20 bg-white p-8 rounded shadow-md">
 
+    @csrf
+    
     <div class="mb-4">
         <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
         <input type="email" name="email" id="email" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
@@ -22,8 +24,7 @@
     </div>
 
     <div class="text-center text-sm">
-        <p>Don't have a student account? <a href="{{ route('student.signup') }}" class="text-orange-500 hover:underline">Sign up</a></p>
-        <p>Don't have a teacher account? <a href="{{ route('teacher.signup') }}" class="text-orange-500 hover:underline">Sign up</a></p>
+        <p>Don't have a student account? <a href="{{ route('student.create') }}" class="text-orange-500 hover:underline">Sign up</a></p>
     </div>
 
 </form>

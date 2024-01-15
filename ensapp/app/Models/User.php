@@ -6,6 +6,7 @@ namespace App\Models;
 use App\Models\DepartmentChief;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -19,7 +20,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'nom',
+        'prenom',
+        'CIN',
+        'phone',
         'email',
         'password',
     ];
@@ -50,6 +54,11 @@ class User extends Authenticatable
     public function isDepartmentChief()
     {
         return $this->hasOne(DepartmentChief::class, 'teacher_id') !== null;
+    }
+
+    public function role(): HasOne
+    {
+        return $this->hasOne(Role::class, 'user_id');
     }
 
 }
