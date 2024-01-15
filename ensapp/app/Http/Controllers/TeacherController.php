@@ -70,10 +70,6 @@ class TeacherController extends Controller
                 'role_name' => 'teacher',
             ]);
             
-            //Login the new created user
-            
-            Auth::login($user);
-            
             // Redirect or return a response
             return redirect()->route('teacher.index')->with('success', 'Teacher registered successfully');
         
@@ -106,7 +102,7 @@ class TeacherController extends Controller
 
     public function update(Request $request, User $teacher)
     {
-        if ($teacher->role->role_name == 'chef' || auth::user()->id === $teacher->id) {
+        if (auth::user()->role->role_name == 'chef' || auth::user()->id === $teacher->id) {
 
             $request->validate([
                 'lastname' => 'required|string',
@@ -153,8 +149,7 @@ class TeacherController extends Controller
      */
     public function destroy(User $teacher)
     {
-        if ($teacher->role->role_name == 'chef' || auth::user()->id === $teacher->id){
-
+        if (auth::user()->role->role_name == 'chef' || auth::user()->id === $teacher->id){
             $teacher->delete();
             return redirect()->back()->with('Success', 'Deleted successfully.');
 

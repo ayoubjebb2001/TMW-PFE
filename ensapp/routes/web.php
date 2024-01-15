@@ -1,18 +1,20 @@
 <?php
 
-use App\Http\Controllers\CourseController;
+use App\Models\Module;
+use App\Models\Filiere;
+use App\Models\Student;
+use App\Models\Teacher;
+use App\Models\Inscription;
+use App\Models\DepartmentChief;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\FiliereController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\InscriptionController;
-use App\Http\Controllers\ModuleController;
-use App\Models\Filiere;
-use App\Models\Inscription;
-use App\Models\Module;
-use App\Models\Student;
-use App\Models\Teacher;
+use App\Http\Controllers\DepartmentChifController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +43,7 @@ Route::resource('inscription', InscriptionController::class);
 Route::resource('filiere', FiliereController::class);
 Route::resource('teacher', TeacherController::class);
 Route::resource('student',StudentController::class);
+Route::resource('chef',DepartmentChifController::class);
 
 // Route::get('/student/signup',[StudentController::class,'signup'])->name('student.signup');
 
