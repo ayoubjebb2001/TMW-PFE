@@ -12,15 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('courses', function (Blueprint $table) {
-            $table->id('course_id');
-            $table->string('Course_name');
-            $table->string('Description');
-            $table->string('Duration');
-            $table->foreignId('module_id')->constrained('modules','module_id')->onDelete('cascade');
+            $table->id();
+            $table->string('course_name');
+            $table->string('description');
+            $table->string('duration');
+            $table->string('link');
+            $table->foreignId('module_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
-
+    
     /**
      * Reverse the migrations.
      */

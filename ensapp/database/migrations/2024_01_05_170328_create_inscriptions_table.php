@@ -12,20 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('inscriptions', function (Blueprint $table) {
-            $table->id('inscription_id');
-            $table->unsignedBigInteger('student_id');
-            $table->unsignedBigInteger('filiere_id');
-            $table->foreign('student_id')->references('student_id')->on('students')->onDelete('cascade');
-            $table->foreign('filiere_id')->references('filiere_id')->on('filieres')->onDelete('cascade');
-
-            $table->enum('Status', ['Accepted', 'Refused', 'Pinned']);
-            $table->integer('Bac_note');
-            $table->integer('Deplome');
-            $table->year('Deplome_year');
-            $table->integer('Deplome_note');
+            $table->id();
+            $table->enum('etat_inscription', ['admis', 'non admis', 'en attente']);
+            $table->decimal('note_bac', 4, 2);
+            $table->year('annee_bac');
+            $table->string('intitule_diplome');
+            $table->decimal('note_diplome', 4, 2);
+            $table->year('annee_diplome');
+            $table->foreignId('student_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
+    
 
     /**
      * Reverse the migrations.
