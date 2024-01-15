@@ -4,18 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Inscription;
 use Illuminate\Http\Request;
-use App\Http\Requests\UserRequest;
-use App\Services\InscriptionService;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\InscriptionRequest;
 
 class InscriptionController extends Controller
 {
-    protected $inscriptionService;
-
-    public function __construct(InscriptionService $inscriptionService)
-    {
-        $this->inscriptionService = $inscriptionService;
-    }
     /**
      * Display a listing of the resource.
      */
@@ -32,18 +25,26 @@ class InscriptionController extends Controller
         return view("inscriptions.create");
     }
 
-    public function store(InscriptionRequest $request, UserRequest $userRequest)
+    public function store(InscriptionRequest $request)
     {
-        // Créer un nouvel utilisateur en utilisant UserRequest pour la validation
-        $user = $this->inscriptionService->createUser($userRequest);
+        // Récupérer l'utilisateur actuellement authentifié
+        $user = Auth::user();
 
-        // Créer un nouvel étudiant associé à l'utilisateur
-        $student = $this->inscriptionService->createStudent($user);
+        // Récupérer l'étudiant associé à l'utilisateur
+        $student = $user->student;
 
-        // Enregistrer les informations scolaires dans la table inscriptions
-        $this->inscriptionService->createInscription($student, $request);
+        // Ajouter les informations supplémentaires dans la table inscriptions
+        Inscription::create([
+            'etat_inscription' => 'en attente',
+            'note_bac' => $request->input('note_bac'),
+            'annee_bac' => $request->input('annee_bac'),
+            'intitule_diplome' => $request->input('intitule_diplome'),
+            'note_diplome' => $request->input('note_diplome'),
+            'annee_diplome' => $request->input('annee_diplome'),
+            'student_id' => $student->id,
+        ]);
 
-        // Rediriger vers une page souhaitée
+        // Rediriger vers une page souhaitée après l'inscription
         return redirect()->route('welcome');
     }
 

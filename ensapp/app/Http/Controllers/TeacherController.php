@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Module;
 use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\TeacherRequest;
+use App\Http\Requests\UserRequest;
 
 class TeacherController extends Controller
 {
@@ -23,23 +26,15 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        return view('teacher.create');
+        $modules = Module::all();
+        return view('teacher.create',compact($modules));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request, TeacherRequest $request1)
     {
-        // Validate the incoming request data
-        $request->validate([
-            'prenom' => 'required|string',
-            'nom' => 'required|string',
-            'Phone' => 'required|string',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|string',
-            'Specialization' => 'required|string',
-        ]);
 
         // Create a new user
         $user = User::create([
@@ -52,17 +47,16 @@ class TeacherController extends Controller
 
         // Create a new teacher associated with the user
         $teacher = Teacher::create([
-            'Specialization' => $request->input('Specialization'),
+            'Specialization' => $request1->input('Specialization'),
             'user_id' => $user->user_id,
         ]);
         
         //Login the new created user
-
-        Auth::login($user);
-        
+        if(Auth::login($user)){
         // Redirect or return a response
         return redirect()->route('teacher.index')->with('success', 'Teacher registered successfully');
-    }
+        }
+        return back()->withErrors(['error' => 'An error occurred. Please try again.']);    }
 
     /**
      * Display the specified resource.
@@ -79,10 +73,6 @@ class TeacherController extends Controller
      */
     public function edit(Teacher $teacher)
     {
-        // Check if the authenticated user is a department chief or super admin
-       /*  if (!Auth::user()->isDepartmentChief() && !Auth::user()->isSuperAdmin()) {
-            abort(403, 'Unauthorized action.');
-        } */
         return view('teacher.edit',[
             'teacher' => $teacher
         ]);
@@ -90,9 +80,6 @@ class TeacherController extends Controller
 
     public function update(Request $request, Teacher $teacher)
     {
-        // Check if the authenticated user is a department chief or super admin
-
-        // Validate the incoming request data
         $request->validate([
             'prenom' => 'required|string',
             'nom' => 'required|string',

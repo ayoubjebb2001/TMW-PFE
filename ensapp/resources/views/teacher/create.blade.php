@@ -8,36 +8,51 @@
 <div class="w-[70%] mx-auto bg-white p-6 rounded-md shadow-md">
     <h1 class="text-2xl font-semibold mb-4">Create a Teacher Profile</h1>
 
-    <form class="p-6" action="" method="POST">
+    <form class="p-6" action="{{route('teacher.store')}}" method="POST">
         @csrf
 
-        <!-- Name Input -->
         <div class="mb-4">
-            <label for="name" class="block text-sm font-medium text-gray-600">Name</label>
-            <input type="text" name="name" id="name" class="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300" required>
+            <label for="first_name" class="block text-gray-700 text-sm font-bold mb-2">First Name</label>
+            <input type="text" name="prenom" id="first_name" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+        </div>
+    
+        <div class="mb-4">
+            <label for="last_name" class="block text-gray-700 text-sm font-bold mb-2">Last Name</label>
+            <input type="text" name="nom" id="last_name" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
         </div>
 
-        <!-- Email Input -->
         <div class="mb-4">
-            <label for="email" class="block text-sm font-medium text-gray-600">Email</label>
-            <input type="email" name="email" id="email" class="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300" required>
+            <label for="naissance" class="block text-gray-700 text-sm font-bold mb-2">date naissance</label>
+            <input type="date" name="date_naissance" id="naissance" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
         </div>
 
-        <!-- Phone Input -->
         <div class="mb-4">
-            <label for="phone" class="block text-sm font-medium text-gray-600">Phone</label>
-            <input type="tel" name="phone" id="phone" class="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300" required>
+            <label for="adresse" class="block text-gray-700 text-sm font-bold mb-2">adresse</label>
+            <input type="text" name="adresse" id="adresse" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+        </div>
 
+        <div class="mb-4">
+            <label for="phone" class="block text-gray-700 text-sm font-bold mb-2">phone</label>
+            <input type="text" name="phone" id="phone" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+        </div>
+    
+        <div class="mb-4">
+            <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+            <input type="password" name="password" id="password" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+        </div>
+
+        <div class="mb-6">
+            <label for="confirm_password" class="block text-gray-700 text-sm font-bold mb-2">Confirm Password</label>
+            <input type="password" name="confirm_password" id="confirm_password" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
         </div>
 
         <!-- Specialization Select -->
         <div class="mb-4">
             <label for="specialization" class="block text-sm font-medium text-gray-600">Specialization</label>
             <select name="specialization" id="specialization" class="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300" required>
-                <option value="frontend">Frontend Developer</option>
-                <option value="backend">Backend Developer</option>
-                <option value="fullstack">Fullstack Developer</option>
-                <!-- Add more options as needed -->
+                @foreach ($modules as $module)
+                    <option value="{{ $module->id}}"> {{$module->module_name }} </option>
+                @endforeach
             </select>
         </div>
 
