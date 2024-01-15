@@ -17,7 +17,7 @@ class TeacherController extends Controller
     public function index()
     {
         $teachers = User::whereHas('role', function($query){
-            $query->where('role_name', 'teacher');
+            $query->where('role_name', 'teacher')->orWhere('role_name', 'chef');
         })->get();
 
         return view('teacher.index', compact('teachers'));
@@ -36,45 +36,51 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate the incoming request data
-        $request->validate([
-            'lastname' => 'required|string',
-            'name' => 'required|string',
-            'phone' => 'required|string',
-            'email' => 'required|email|unique:users,email',
-            'cin' => 'required|unique:users,cin',
-            'password' => 'required|string',
-            'specialization' => 'required|string',
-        ]);
+        if (auth::user()->role->role_name === 'chef'){
 
-        // dd($request);
+            
+            // Validate the incoming request data
+            $request->validate([
+                'lastname' => 'required|string',
+                'name' => 'required|string',
+                'phone' => 'required|string',
+                'email' => 'required|email|unique:users,email',
+                'cin' => 'required|unique:users,cin',
+                'password' => 'required|string',
+                'specialization' => 'required|string',
+            ]);
 
-        // Create a new user
-        $user = User::create([
-            'prenom' => $request->input('name'),
-            'nom' => $request->input('lastname'),
-            'phone' => $request->input('phone'),
-            'email' => $request->input('email'),
-            'CIN' => $request->input('cin'),
-            'password' => Hash::make($request->input('password')),
-        ]);
+            // dd($request);
+
+            // Create a new user
+            $user = User::create([
+                'prenom' => $request->input('name'),
+                'nom' => $request->input('lastname'),
+                'phone' => $request->input('phone'),
+                'email' => $request->input('email'),
+                'CIN' => $request->input('cin'),
+                'password' => Hash::make($request->input('password')),
+            ]);
 
 
-        // Create a new teacher associated with the user
-        Role::create([
-            'Specialization' => $request->input('specialization'),
-            'user_id' => $user->id,
-            'role_name' => 'teacher',
-        ]);
+            // Create a new teacher associated with the user
+            Role::create([
+                'Specialization' => $request->input('specialization'),
+                'user_id' => $user->id,
+                'role_name' => 'teacher',
+            ]);
+            
+            //Login the new created user
+            
+            Auth::login($user);
+            
+            // Redirect or return a response
+            return redirect()->route('teacher.index')->with('success', 'Teacher registered successfully');
         
-        //Login the new created user
+        }else {
+            return redirect()->route('teacher.index')->with('Error', 'You do not have the rights to access this method.');
 
-        
-
-        Auth::login($user);
-        
-        // Redirect or return a response
-        return redirect()->route('teacher.index')->with('success', 'Teacher registered successfully');
+        }
     }
 
     /**
