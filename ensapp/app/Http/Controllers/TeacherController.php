@@ -16,7 +16,11 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        return view('teacher.index');
+        $teachers = User::whereHas('role', function($query){
+            $query->where('role_name', 'teacher');
+        })->get();
+
+        return view('teacher.index', compact('teachers'));
     }
 
     /**
@@ -76,7 +80,7 @@ class TeacherController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Teacher $teacher)
+    public function show(User $teacher)
     {
         return view('teacher.show',[
             'Teacher' => $teacher
@@ -86,54 +90,72 @@ class TeacherController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Teacher $teacher)
+    public function edit(User $teacher)
     {
-        // Check if the authenticated user is a department chief or super admin
-       /*  if (!Auth::user()->isDepartmentChief() && !Auth::user()->isSuperAdmin()) {
-            abort(403, 'Unauthorized action.');
-        } */
+
         return view('teacher.edit',[
             'teacher' => $teacher
         ]);
     }
 
-    public function update(Request $request, Teacher $teacher)
+    public function update(Request $request, User $teacher)
     {
-        // Check if the authenticated user is a department chief or super admin
+        if ($teacher->role->role_name == 'chef' || auth::user()->id === $teacher->id) {
 
-        // Validate the incoming request data
-        $request->validate([
-            'prenom' => 'required|string',
-            'nom' => 'required|string',
-            'Phone' => 'required|string',
-            'email' => 'required|email|unique:users,email,' . $teacher->user_id,
-            'Specialization' => 'required|string',
-        ]);
+            $request->validate([
+                'lastname' => 'required|string',
+                'name' => 'required|string',
+                'phone' => 'required|string',
+                'email' => 'required|email|unique:users,email,' . $teacher->id,
+                'cin' => 'required|unique:users,cin,' . $teacher->id,
+                'old_password' => 'required|string',
+                'new_password' => 'required|string',
+                'specialization' => 'required|string',
+            ]);
 
-        // Update the associated user's information
-        $teacher->user->update([
-            'prenom' => $request->input('prenom'),
-            'nom' => $request->input('nom'),
-            'Phone' => $request->input('Phone'),
-            'email' => $request->input('email'),
-        ]);
+            if ($request->input('old_password') != $request->input('new_password') || !Hash::check($request->input('old_password'), $teacher->password)) {
+                return redirect()->back()->with('Error', 'Passwords do not match');
 
-        // Update the teacher's information
-        $teacher->update([
-            'Specialization' => $request->input('Specialization'),
-        ]);
+            } else {
 
-        // Redirect or return a response
-        return redirect()->route('teacher.index')->with('success', 'Teacher information updated successfully');
+                $teacher->update([
+                    'prenom' => $request->input('name'),
+                    'nom' => $request->input('lastname'),
+                    'phone' => $request->input('phone'),
+                    'email' => $request->input('email'),
+                    'CIN' => $request->input('cin'),
+                    'password' => bcrypt($request->input('new_password')),
+                ]);
+
+                $teacher->role->update([
+                    'Specialization' => $request->input('specialization'),
+                ]);
+
+                return redirect()->route('teacher.index')->with('success', 'Teacher information updated successfully');
+
+            }
+
+        }else{
+            return redirect()->back()->with('Error', 'You do not have the rights to access this method. ');
+
+        }
     }
 
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Teacher $teacher)
+    public function destroy(User $teacher)
     {
-        //
+        if ($teacher->role->role_name == 'chef' || auth::user()->id === $teacher->id){
+
+            $teacher->delete();
+            return redirect()->back()->with('Success', 'Deleted successfully.');
+
+        }else {
+            return redirect()->back()->with('Error', 'You do not have the rights to access this method.');
+
+        }
     }
     
     /**

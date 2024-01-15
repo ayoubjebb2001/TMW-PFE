@@ -64,7 +64,7 @@ class StudentController extends Controller
         Auth::login($user);
 
         // Redirect or return a response
-        return redirect()->route('student.index')->with('success', 'Student registered successfully');
+        return redirect()->route('login')->with('success', 'Student registered successfully');
     }
 
 

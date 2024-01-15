@@ -36,17 +36,13 @@ class UserController extends Controller
     
             $user = auth()->user();
 
-            $authUser = User::with('role')->where('user_id', 2)->firstOrFail();
-
-            $roleName = $authUser->role->role_name;
-
-            dd($roleName);
+            $roleName = $user->role->role_name;
             
-            if ($user->role && ($user->role->name === 'teacher' || $user->role->name === 'chef')) {
+            if ($roleName && ($roleName === 'teacher' || $roleName === 'chef')) {
                 return redirect('/dashboard')->with('message', 'You are now logged in!');
             } 
     
-            if ($user->role && $user->role->name === 'student') {
+            if ($roleName && $roleName === 'student') {
                 return redirect('/')->with('message', 'You are now logged in!');
             }
         }
