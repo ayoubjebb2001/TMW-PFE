@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Filiere extends Model
 {
@@ -14,4 +15,9 @@ class Filiere extends Model
         'description',
         'capacity',
     ];
+
+    public function modules(): HasMany
+    {
+        return $this->hasMany(Module::class);
+    }
 }

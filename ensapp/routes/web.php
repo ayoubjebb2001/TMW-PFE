@@ -44,6 +44,8 @@ Route::resource('filiere', FiliereController::class);
 Route::resource('teacher', TeacherController::class);
 Route::resource('student',StudentController::class);
 Route::resource('chef',DepartmentChifController::class);
+Route::get('/module/create/{id}', [ModuleController::class, 'create'])->name('module.create');
+Route::get('modules/{module}/edit/{id}', [ModuleController::class, 'edit'])->name('module.edit');
 
 // Route::get('/student/signup',[StudentController::class,'signup'])->name('student.signup');
 

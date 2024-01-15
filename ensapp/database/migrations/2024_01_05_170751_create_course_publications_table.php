@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('course_publications', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('course_id')->constrained('courses');
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('course_id')->constrained('courses')->cascadeOnDelete();
             $table->text('course_file');
             $table->timestamp('Publish_date');
             $table->timestamps();
