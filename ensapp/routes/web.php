@@ -27,30 +27,48 @@ use App\Http\Controllers\DepartmentChifController;
 |
 */
 
-Route::get('/', function () {
-    return view('student.index');
-})->name('home');
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [UserController::class,'login'])->name('login');
+    Route::post('/login', [UserController::class,'authenticate'])->name('authenticate');
+});
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::middleware('auth')->group(function () {
+
+    Route::get('/home', function () {
+        return view('student.index');
+    })->name('home');
+   
+});
+
+Route::middleware(['auth', 'checkRole:teacher,chef'])->group(function () {
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::resource('module', ModuleController::class);
+    Route::resource('course',CourseController::class);
+    Route::resource('inscription', InscriptionController::class);
+    Route::resource('filiere', FiliereController::class);
+    Route::resource('teacher', TeacherController::class);
+    Route::resource('student',StudentController::class);
+
+});
+
+Route::middleware(['auth', 'checkRole:chef'])->group(function () {
+
+    Route::resource('chef',DepartmentChifController::class);
+    Route::get('/module/create/{id}', [ModuleController::class, 'create'])->name('module.create');
+    Route::get('modules/{module}/edit/{id}', [ModuleController::class, 'edit'])->name('module.edit');
+    
+});
+
 
 
 // Route::resource('user', UserController::class);
-Route::resource('module', ModuleController::class);
-Route::resource('course',CourseController::class);
-Route::resource('inscription', InscriptionController::class);
-Route::resource('filiere', FiliereController::class);
-Route::resource('teacher', TeacherController::class);
-Route::resource('student',StudentController::class);
-Route::resource('chef',DepartmentChifController::class);
-Route::get('/module/create/{id}', [ModuleController::class, 'create'])->name('module.create');
-Route::get('modules/{module}/edit/{id}', [ModuleController::class, 'edit'])->name('module.edit');
 
 // Route::get('/student/signup',[StudentController::class,'signup'])->name('student.signup');
 
-Route::get('/login', [UserController::class,'login'])->name('login');
-Route::post('/login', [UserController::class,'authenticate'])->name('authenticate');
 // Route::get('/teacher/signup',[TeacherController::class,'signup'])->name('teacher.signup');
 // Route::get('/student/signup',[StudentController::class,'signup'])->name('student.signup');
 // // Route::get('/logout', [userController::class,'logout'])->name('logout')->middleware('auth');
