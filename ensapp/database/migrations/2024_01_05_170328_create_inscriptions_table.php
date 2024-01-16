@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('deplome_year');
             $table->integer('deplome_note');
             $table->text('file_path');
+            $table->double('score');
             $table->timestamps();
         });
     }

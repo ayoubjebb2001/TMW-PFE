@@ -62,7 +62,7 @@
 
                 @if(auth()->user()->role->role_name == 'chef')
                     <li class="cursor-pointer my-1 py-1 px-6 {{ request()->is('inscription*') ? 'bg-orange-500' : 'hover:bg-orange-500' }} mx-6 rounded-lg transition ease-in-out duration-500">
-                        <a href="{{ route('inscription.index') }}" class="font-semibold flex items-center justify-start">
+                        <a href="{{ route('inscription.list') }}" class="font-semibold flex items-center justify-start">
                             <i class="bx bx-user-check text-2xl mr-2 "></i>
                             <span>Inscriptions</span>
                         </a>

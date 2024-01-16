@@ -16,8 +16,20 @@ class InscriptionController extends Controller
      */
     public function index()
     {
-        $inscriptions = Inscription::all();
-        return view('inscription.index', compact('inscriptions'));
+        $user = Auth::user();
+        $acceptedInscription = $user->inscriptions->where('status', 'Accepted')->first();
+
+        if ($acceptedInscription) {
+            $filiere = $acceptedInscription->filiere;
+            $modules = $filiere->modules()->orderBy('duration')->get();;
+
+            return view('inscription.index', compact('filiere', 'modules'));
+        } else {
+
+            $inscriptions = Inscription::all();
+            return view('student.index', compact('inscriptions'));
+        }
+
     }
 
     /**
@@ -50,6 +62,8 @@ class InscriptionController extends Controller
         $fileName = time() . '_' . $file->getClientOriginalName();
         $filePath = $file->storeAs('uploads', $fileName, 'public');
 
+        $score = ($validatedData['bac_note'] + $validatedData['deplome_note'])/2;
+
         Inscription::create([
             'user_id' => $validatedData['user_id'],
             'filiere_id' => $validatedData['filiere'],
@@ -59,6 +73,7 @@ class InscriptionController extends Controller
             'deplome_year' => $validatedData['deplome_year'],
             'deplome_note' => $validatedData['deplome_note'],
             'file_path' => 'storage/' . $filePath,
+            'score' => $score,
         ]);
 
         return redirect()->back()->with('success', 'Inscription registered successfully');
@@ -94,5 +109,46 @@ class InscriptionController extends Controller
     public function destroy(Inscription $inscription)
     {
         //
+    }
+
+    public function list()
+    {
+        $filieres = Filiere::with(['inscriptions' => function ($query) {
+            $query->where('status', 'Pinned')->orderBy('score', 'desc');
+        }])->get();
+
+        $inscriptions = $filieres->flatMap(function ($filiere) {
+            return $filiere->inscriptions;
+        });
+
+        return view('teacher.inscription.list', compact('filieres', 'inscriptions'));
+    }
+
+    public function students()
+    {
+        $filieres = Filiere::with(['inscriptions' => function ($query) {
+            $query->where('status', 'Accepted')->orderBy('score', 'desc');
+        }])->get();
+
+        $inscriptions = $filieres->flatMap(function ($filiere) {
+            return $filiere->inscriptions;
+        });
+
+        return view('teacher.inscription.student', compact('filieres', 'inscriptions'));
+    }
+
+    public function action(Request $request)
+    {
+        if (auth::user()->role->role_name === 'chef'){
+
+            $inscriptionIds = $request->input('inscriptions');
+    
+            Inscription::whereIn('id', $inscriptionIds)->update(['status' => 'Accepted']);
+    
+            Inscription::whereNotIn('id', $inscriptionIds)->update(['status' => 'Refused']);
+    
+            return redirect()->back()->with('success', 'Status updated successfully');
+            
+        }
     }
 }

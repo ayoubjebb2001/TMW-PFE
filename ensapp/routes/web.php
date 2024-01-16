@@ -61,6 +61,9 @@ Route::middleware(['auth', 'checkRole:chef'])->group(function () {
     Route::get('modules/{module}/edit/{id}', [ModuleController::class, 'edit'])->name('module.edit');
     Route::get('/teacher/create', [TeacherController::class, 'create'])->name('teacher.create');
     Route::get('course/create/{id}', [CourseController::class, 'create'])->name('course.create');
+    Route::get('list_inscription', [InscriptionController::class, 'list'])->name('inscription.list');
+    Route::post('list_inscription/action', [InscriptionController::class, 'action'])->name('inscription.action');
+    Route::get('list_students', [InscriptionController::class, 'students'])->name('inscription.students');
     
 });
 

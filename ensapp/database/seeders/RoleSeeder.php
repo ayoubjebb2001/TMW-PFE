@@ -26,14 +26,25 @@ class RoleSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
+        $teacherCount = 0;
+
         foreach ($userIds as $userId) {
+            
+            if ($teacherCount < 7) {
+                $roleName = 'teacher';
+                $teacherCount++;
+            } else {
+                $roleName = 'student';
+            }
+
             DB::table('roles')->insert([
                 'user_id' => $userId,
-                'role_name' => $faker->randomElement(['teacher', 'student']),
+                'role_name' => $roleName,
                 'Specialization' => $faker->word,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
         }
+
     }
 }
