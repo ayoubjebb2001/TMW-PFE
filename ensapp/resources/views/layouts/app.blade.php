@@ -21,47 +21,70 @@
 
         <ul class="text-xs my-2 ">
         
-          <li class="cursor-pointer my-1 py-1 px-6 bg-orange-500 mx-6 rounded-lg text-left">
-            <a href="{{ route('dashboard') }}" class="font-semibold flex items-center justify-start">
-              <i class="bx bx-pie-chart-alt-2 text-2xl mr-2 "></i>
-              <span>Dashboard</span>
-            </a>
-          </li>
-          
-          <li class="cursor-pointer my-1 py-1 px-6 hover:bg-orange-500 mx-6 rounded-lg transition ease-in-out duration-500">
-            <a href="{{ route('teacher.index') }}" class="font-semibold flex items-center justify-start">
-              <i class="bx bx-user-check text-2xl mr-2 "></i>
-              <span>Teachers</span>
-            </a>
-          </li>
+
+
+          @auth
+            @if(auth()->user()->role->role_name == 'teacher' or auth()->user()->role->role_name == 'chef')
+              <li class="cursor-pointer my-1 py-1 px-6 {{ request()->is('dashboard') ? 'bg-orange-500' : 'hover:bg-orange-500' }} mx-6 rounded-lg text-left">
+                  <a href="{{ route('dashboard') }}" class="font-semibold flex items-center justify-start">
+                      <i class="bx bx-pie-chart-alt-2 text-2xl mr-2 "></i>
+                      <span>Dashboard</span>
+                  </a>
+              </li>
+
+              <li class="cursor-pointer my-1 py-1 px-6 {{ request()->is('teacher') ? 'bg-orange-500' : 'hover:bg-orange-500' }} mx-6 rounded-lg transition ease-in-out duration-500">
+                  <a href="{{ route('teacher.index') }}" class="font-semibold flex items-center justify-start">
+                      <i class="bx bx-user-check text-2xl mr-2 "></i>
+                      <span>Teachers</span>
+                  </a>
+              </li>
+
+              <li class="cursor-pointer my-1 py-1 px-6 {{ request()->is('filiere') ? 'bg-orange-500' : 'hover:bg-orange-500' }} mx-6 rounded-lg transition ease-in-out duration-500">
+                <a href="{{ route('filiere.index') }}" class="font-semibold flex items-center justify-start">
+                  <i class="bx bxs-component text-2xl mr-2 "></i>
+                  <span>Filieres</span>
+                </a>
+              </li>
+
+              <li class="cursor-pointer my-1 py-1 px-6 {{ request()->is('module') ? 'bg-orange-500' : 'hover:bg-orange-500' }} mx-6 rounded-lg transition ease-in-out duration-500">
+                <a href="{{ route('module.index') }}" class="font-semibold flex items-center justify-start">
+                  <i class="bx bx-book text-2xl mr-2 "></i>
+                  <span class="">Modules</span>
+                </a>
+              </li>
+
+              <li class="cursor-pointer my-1 py-1 px-6 {{ request()->is('calandar') ? 'bg-orange-500' : 'hover:bg-orange-500' }} mx-6 rounded-lg transition ease-in-out duration-500">
+                <a href="" class="font-semibold flex items-center justify-start">
+                  <i class="bx bx-book text-2xl mr-2 "></i>
+                  <span class="">calendar</span>
+                </a>
+              </li>
+
+                @if(auth()->user()->role->role_name == 'chef')
+                    <li class="cursor-pointer my-1 py-1 px-6 {{ request()->is('inscription*') ? 'bg-orange-500' : 'hover:bg-orange-500' }} mx-6 rounded-lg transition ease-in-out duration-500">
+                        <a href="{{ route('inscription.index') }}" class="font-semibold flex items-center justify-start">
+                            <i class="bx bx-user-check text-2xl mr-2 "></i>
+                            <span>Inscriptions</span>
+                        </a>
+                    </li>
+                @endif
+            @endif
+          @endauth
 
           <li class="cursor-pointer my-1 py-1 px-6 hover:bg-orange-500 mx-6 rounded-lg transition ease-in-out duration-500">
-            <a href="{{ route('inscription.index') }}" class="font-semibold flex items-center justify-start">
-              <i class="bx bx-user-check text-2xl mr-2 "></i>
-              <span>Inscriptions</span>
-            </a>
+
+            <form action="{{ route('logout') }}" method="get">
+              @csrf
+
+              <button type="submit" class="text-red-700 font-semibold flex items-center justify-start">
+                <i class='bx bx-log-out text-2xl mr-2'></i>
+                <span class="">Logout</span>
+              </button>
+            </form>
+
           </li>
+
           
-          <li class="cursor-pointer my-1 py-1 px-6 hover:bg-orange-500 mx-6 rounded-lg transition ease-in-out duration-500">
-            <a href="{{ route('filiere.index') }}" class="font-semibold flex items-center justify-start">
-              <i class="bx bxs-component text-2xl mr-2 "></i>
-              <span>Filieres</span>
-            </a>
-          </li>
-          
-          <li class="cursor-pointer my-1 py-1 px-6 hover:bg-orange-500 mx-6 rounded-lg transition ease-in-out duration-500">
-            <a href="{{ route('module.index') }}" class="font-semibold flex items-center justify-start">
-              <i class="bx bx-book text-2xl mr-2 "></i>
-              <span class="">Modules</span>
-            </a>
-          </li>
-          
-          <li class="cursor-pointer my-1 py-1 px-6 hover:bg-orange-500 mx-6 rounded-lg transition ease-in-out duration-500">
-            <a href="" class="font-semibold flex items-center justify-start">
-              <i class="bx bx-book text-2xl mr-2 "></i>
-              <span class="">calendar</span>
-            </a>
-          </li>
 
         </ul>
 

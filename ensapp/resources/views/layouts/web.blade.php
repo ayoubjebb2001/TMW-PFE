@@ -49,6 +49,17 @@
             </a>
           </li>
 
+          <li class="cursor-pointer my-1 py-1 px-6 hover:bg-sky-500 mx-6 rounded-lg transition ease-in-out duration-500">
+            <form action="{{ route('logout') }}" method="post">
+              @csrf
+              method('GET')
+              <button type="submit" class="text-red-700 font-semibold flex items-center justify-start">
+                <i class='bx bx-log-out text-2xl mr-2'></i>
+                <span class="">Logout</span>
+              </button>
+            </form>
+           
+          </li>
         </ul>
 
       </aside>
