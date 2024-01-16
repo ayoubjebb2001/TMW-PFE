@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('module_id')->constrained('modules')->cascadeOnDelete();
-            $table->string('Course_name');
-            $table->string('Description');
-            $table->string('Duration');
+            $table->string('course_name');
+            $table->string('description');
+            $table->string('duration');
+            $table->string('file_path');
             $table->timestamps();
         });
     }

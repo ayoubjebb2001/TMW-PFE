@@ -41,7 +41,17 @@
         <!-- Capacity Input -->
         <div class="mb-4">
             <label for="duration" class="block text-sm font-medium text-gray-600">Duration</label>
-            <input type="number" name="duration" id="duration" class="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300" required>
+
+            <select name="duration" id="duration" class="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300" required>
+                
+                <option value="1 semester">Semester 1</option>
+                <option value="2 semester">Semester 2</option>
+                <option value="3 semester">Semester 3</option>
+                <option value="4 semester">Semester 4</option>
+                <option value="5 semester">Semester 5</option>
+                <option value="6 semester">Semester 6</option>
+                
+            </select>
         </div>
 
         <!-- Submit Button -->

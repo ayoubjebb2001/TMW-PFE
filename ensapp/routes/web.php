@@ -62,6 +62,7 @@ Route::middleware(['auth', 'checkRole:chef'])->group(function () {
     Route::get('/module/create/{id}', [ModuleController::class, 'create'])->name('module.create');
     Route::get('modules/{module}/edit/{id}', [ModuleController::class, 'edit'])->name('module.edit');
     Route::get('/teacher/create', [TeacherController::class, 'create'])->name('teacher.create');
+    Route::get('course/create/{id}', [CourseController::class, 'create'])->name('course.create');
     
 });
 

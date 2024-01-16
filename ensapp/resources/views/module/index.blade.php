@@ -123,6 +123,9 @@
                         Duration (total heurs)
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        Courses
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         Actions
                     </th>
                 </tr>
@@ -147,6 +150,13 @@
                             {{ $module->duration }}
                         </td>
                         <td class="px-6 py-4">
+                            <a href="{{ route('module.show',$module->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Show courses</a>
+                            <br>
+                            <a href="{{ route('course.create', ['id' => $module->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Add course</a>
+                            
+                        </td>
+                        <td class="px-6 py-4">
+                            
                             <a href="{{ route('module.edit', ['module' => $module->id, 'id' => $filiere->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
 
     
@@ -156,6 +166,7 @@
     
                                 <button type="submit" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</button>
                             </form>
+                            
                         </td>
                     </tr>
                 @empty

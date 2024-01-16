@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Filiere;
 use App\Models\Module;
-use App\Models\Teacher;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -73,7 +73,8 @@ class ModuleController extends Controller
      */
     public function show(Module $module)
     {
-        //
+        $courses = Course::where('module_id', $module->id)->get();
+        return view('module.show', compact('module', 'courses'));
     }
 
     /**

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('deplome');
             $table->year('deplome_year');
             $table->integer('deplome_note');
-            $table->text('files');
+            $table->text('file_path');
             $table->timestamps();
         });
     }
