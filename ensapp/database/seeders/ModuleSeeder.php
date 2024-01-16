@@ -45,32 +45,44 @@ class ModuleSeeder extends Seeder
         ];
         
 
-        foreach ($usersIds as $userId) {
+        $teachersAndChiefsIds = \App\Models\User::whereHas('role', function ($query) {
+            $query->whereIn('role_name', ['teacher', 'chef']);
+        })->pluck('id')->toArray();
+        
+        $durations = ['1 semester', '2 semesters', '3 semesters', '4 semesters', '5 semesters', '6 semesters'];
+        
+        foreach ($teachersAndChiefsIds as $userId) {
             // Generate modules for TMW filiere
-            for ($i = 0; $i < 20; $i++) {
-                DB::table('modules')->insert([
-                    'user_id' => $userId,
-                    'filiere_id' => $tmwFiliereId,
-                    'module_name' => $faker->randomElement($informaticModules),
-                    'description' => $faker->sentence,
-                    'duration' => $faker->randomElement(['1 semester', '2 semesters', '3 semesters', '4 semesters', '5 semesters', '6 semesters']),
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
+            foreach ($durations as $duration) {
+                for ($i = 0; $i < 1; $i++) {
+                    DB::table('modules')->insert([
+                        'user_id' => $userId,
+                        'filiere_id' => $tmwFiliereId,
+                        'module_name' => $faker->randomElement($informaticModules),
+                        'description' => $faker->sentence,
+                        'duration' => $duration,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
             }
-
+        
             // Generate modules for CLE filiere
-            for ($i = 0; $i < 20; $i++) {
-                DB::table('modules')->insert([
-                    'user_id' => $userId,
-                    'filiere_id' => $cleFiliereId,
-                    'module_name' => $faker->randomElement($informaticModules),
-                    'description' => $faker->sentence,
-                    'duration' => $faker->randomElement(['1 semester', '2 semesters', '3 semesters', '4 semesters', '5 semesters', '6 semesters']),
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
+            foreach ($durations as $duration) {
+                for ($i = 0; $i < 1; $i++) {
+                    DB::table('modules')->insert([
+                        'user_id' => $userId,
+                        'filiere_id' => $cleFiliereId,
+                        'module_name' => $faker->randomElement($informaticModules),
+                        'description' => $faker->sentence,
+                        'duration' => $duration,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
             }
         }
+        
+
     }
 }

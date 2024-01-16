@@ -16,10 +16,13 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        $filieres = Filiere::all();
+        $filieres = Filiere::with(['modules' => function ($query) {
+            $query->orderBy('duration');
+        }])->get();
+    
         return view('module.index', compact('filieres'));
     }
-
+    
     /**
      * Show the form for creating a new resource.
      */
