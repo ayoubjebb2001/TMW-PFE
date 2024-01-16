@@ -8,8 +8,13 @@
 
 
     <h1 class="text-3xl font-semibold">
-        Welcome {{ Auth::user()->nom; }} {{ Auth::user()->prenom; }}...
+        @auth
+            Welcome @if(Auth::user()->nom and Auth::user()->prenom)
+                {{ Auth::user()->nom }} {{ Auth::user()->prenom }}...
+            @endif
+        @endauth
     </h1>
+    
 
     <h4 class="mt-8 mb-2 text-xl">inscriptions list</h4>
 

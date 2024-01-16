@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('filiere_id')->constrained('filieres')->cascadeOnDelete();
             $table->string('module_name');
             $table->string('description');
-            $table->string('duration');
+            $table->enum('duration', ['1 semester', '2 semesters', '3 semesters', '4 semesters', '5 semesters', '6 semesters']);
             $table->timestamps();
         });
     }
