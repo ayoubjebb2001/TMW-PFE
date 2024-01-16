@@ -27,31 +27,25 @@
         </div>
 
         <div class="mb-4">
-            <label for="adresse" class="block text-gray-700 text-sm font-bold mb-2">adresse</label>
-            <input type="text" name="adresse" id="adresse" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+            <label for="phone" class="block text-gray-700 text-sm font-bold mb-2">phone</label>
+            <input type="text" name="phone" id="phone" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
         </div>
 
         <div class="mb-4">
-            <label for="phone" class="block text-gray-700 text-sm font-bold mb-2">phone</label>
-            <input type="text" name="phone" id="phone" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+            <label for="email" class="block text-gray-700 text-sm font-bold mb-2">email</label>
+            <input type="email" name="email" id="email" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
         </div>
     
         <div class="mb-4">
             <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
             <input type="password" name="password" id="password" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
         </div>
-
-        <div class="mb-6">
-            <label for="confirm_password" class="block text-gray-700 text-sm font-bold mb-2">Confirm Password</label>
-            <input type="password" name="confirm_password" id="confirm_password" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
-        </div>
-
         <!-- Specialization Select -->
         <div class="mb-4">
             <label for="specialization" class="block text-sm font-medium text-gray-600">Specialization</label>
             <select name="specialization" id="specialization" class="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300" required>
                 @foreach ($modules as $module)
-                    <option value="{{ $module->id}}"> {{$module->module_name }} </option>
+                    <option value="{{ $module->module_name}}"> {{$module->module_name }} </option>
                 @endforeach
             </select>
         </div>

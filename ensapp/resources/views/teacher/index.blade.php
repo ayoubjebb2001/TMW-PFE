@@ -42,11 +42,11 @@
                     {{ $teacher->user->email }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $teacher->Specialization }}
+                    {{ $teacher->specialization }}
                 </td>
                 <td class="px-6 py-4">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline px-3">Delete</a>
+                    <a href="{{route('teacher.edit',$teacher)}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                    <a href="{{route('teacher.destroy',$teacher)}}" class="font-medium text-red-600 dark:text-red-500 hover:underline px-3">Delete
 
                 </td>
             </tr>

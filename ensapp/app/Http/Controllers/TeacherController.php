@@ -18,7 +18,8 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        return view('teacher.index');
+        $teachers = Teacher::all();
+        return view('teacher.index', compact('teachers'));
     }
 
     /**
@@ -27,36 +28,30 @@ class TeacherController extends Controller
     public function create()
     {
         $modules = Module::all();
-        return view('teacher.create',compact($modules));
+        return view('teacher.create',compact('modules'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UserRequest $request, TeacherRequest $request1)
+    public function store(Request $request)
     {
-
+        dd($request);
         // Create a new user
         $user = User::create([
             'prenom' => $request->input('prenom'),
             'nom' => $request->input('nom'),
-            'Phone' => $request->input('Phone'),
+            'phone' => $request->input('phone'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
         ]);
 
         // Create a new teacher associated with the user
         $teacher = Teacher::create([
-            'Specialization' => $request1->input('Specialization'),
-            'user_id' => $user->user_id,
+            'specialization' => $request->input('specialization'),
+            'user_id' => $user->id,
         ]);
-        
-        //Login the new created user
-        if(Auth::login($user)){
-        // Redirect or return a response
-        return redirect()->route('teacher.index')->with('success', 'Teacher registered successfully');
-        }
-        return back()->withErrors(['error' => 'An error occurred. Please try again.']);    }
+    }
 
     /**
      * Display the specified resource.

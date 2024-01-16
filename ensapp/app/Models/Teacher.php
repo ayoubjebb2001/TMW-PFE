@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Teacher extends Model
 {
     use HasFactory;
+    protected $fillable = ['specialization'];
 
     /**
      * Get the user that owns the Teacher
@@ -18,7 +19,7 @@ class Teacher extends Model
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'foreign_key', 'other_key');
+        return $this->belongsTo(User::class);
     }
 
     /**

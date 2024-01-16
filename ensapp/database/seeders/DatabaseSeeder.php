@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->createTeacher('Fouad', 'KHAROUBI', 'Didactique et micro-enseignement');
         $this->createTeacher('Abdelali', 'MOUNADI', 'Structures de donnees');
         $this->createTeacher('Mohamed', 'RAHMOUNI', 'Bases de donnees');
-        $this->createTeacher('Mustapha', 'Ghassoub', 'Psychopedagogie');
+        $this->createTeacher('Mustapha', 'GHASSOUB', 'Psychopedagogie');
 
         // Créez 60 étudiants et une inscription à chacun
         User::factory()->count(60)->create()->each(function ($user) {
