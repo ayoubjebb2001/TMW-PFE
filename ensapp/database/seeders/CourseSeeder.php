@@ -16,7 +16,7 @@ class CourseSeeder extends Seeder
         $modules = DB::table('modules')->get();
 
         foreach ($modules as $module) {
-            for ($i = 1; $i <= 6; $i++) {
+            for ($i = 1; $i <= 5; $i++) {
                 DB::table('courses')->insert([
                     'module_id' => $module->id,
                     'course_name' => "Course {$i} for Module {$module->id}",

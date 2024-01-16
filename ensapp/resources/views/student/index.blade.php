@@ -22,73 +22,76 @@
     
         <div class="flex justify-between items-center bg-white dark:bg-gray-900 p-4">
     
-            <button class="bg-gray-50 dark:bg-gray-700 py-2 px-8 rounded-sm"><a class="dark:text-slate-300 text-gray-700" href="{{ route('teacher.create') }}">New inscription</a></button>
+            <button class="bg-gray-50 dark:bg-gray-700 py-2 px-8 rounded-sm"><a class="dark:text-slate-300 text-gray-700" href="{{ route('inscription.create') }}">New inscription</a></button>
     
         </div>
     
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th scope="col" class="p-4">
-                        <div class="flex items-center">
-                            <input id="checkbox-all-search" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                            <label for="checkbox-all-search" class="sr-only">checkbox</label>
-                        </div>
+                    <th scope="col" class="px-6 py-3">
+                        Nom
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Product name
+                        Prenom
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Color
+                        CIN
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Category
+                        Email
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Price
+                        Phone
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Action
+                        Filiere
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Resultat
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Actions
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                @forelse ($inscriptions as $inscription)
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Apple MacBook Pro 17"
-                    </th>
-                    <td class="px-6 py-4">
-                        Silver
-                    </td>
-                    <td class="px-6 py-4">
-                        Laptop
-                    </td>
-                    <td class="px-6 py-4">
-                        $2999
-                    </td>
-                    <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    </td>
-                </tr>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                    
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Microsoft Surface Pro
-                    </th>
-                    <td class="px-6 py-4">
-                        White
-                    </td>
-                    <td class="px-6 py-4">
-                        Laptop PC
-                    </td>
-                    <td class="px-6 py-4">
-                        $1999
-                    </td>
-                    <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    </td>
-                </tr>
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{ $inscription->user->nom }}
+                        </th>
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{ $inscription->user->prenom }}
+                        </th>
+                        <td class="px-6 py-4">
+                            {{ $inscription->user->CIN }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $inscription->user->email }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $inscription->user->phone }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $inscription->filiere->filiere_name }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $inscription->status }}
+                        </td>
+                        <td class="px-6 py-4">
+                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View modules</a>
+                            <br>
+                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View calander</a>
+                        </td>
+                    </tr>
+
+                    @empty
+                        <tr>
+                            <td>No inscriptions.</td> 
+                        </tr>
+                @endforelse
             </tbody>
         </table>
     </div>

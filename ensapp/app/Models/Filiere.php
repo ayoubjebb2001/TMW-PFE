@@ -20,4 +20,10 @@ class Filiere extends Model
     {
         return $this->hasMany(Module::class);
     }
+
+    public function inscriptions(): HasMany
+    {
+        return $this->hasMany(Inscription::class);
+    }
+
 }

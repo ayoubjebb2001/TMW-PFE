@@ -18,10 +18,18 @@ class RoleSeeder extends Seeder
 
         $userIds = \App\Models\User::pluck('id')->toArray();
 
+        DB::table('roles')->insert([
+            'user_id' => 1,
+            'role_name' => 'chef',
+            'Specialization' => 'Full-stack',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
         foreach ($userIds as $userId) {
             DB::table('roles')->insert([
                 'user_id' => $userId,
-                'role_name' => $faker->randomElement(['teacher', 'student', 'chef']),
+                'role_name' => $faker->randomElement(['teacher', 'student']),
                 'Specialization' => $faker->word,
                 'created_at' => now(),
                 'updated_at' => now(),

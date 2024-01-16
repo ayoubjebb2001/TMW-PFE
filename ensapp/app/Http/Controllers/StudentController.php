@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Student;
+use App\Models\Inscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -16,7 +17,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return view("student.index");
+        $inscriptions = Inscription::all();
+        return view('student.index', compact('inscriptions'));
     }
 
     /**

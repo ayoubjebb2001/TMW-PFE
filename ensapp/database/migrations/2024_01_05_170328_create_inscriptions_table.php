@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignId('filiere_id')->constrained('filieres')->cascadeOnDelete();
             $table->enum('status', ['Accepted', 'Refused', 'Pinned']);
             $table->integer('bac_note');
-            $table->integer('deplome');
-            $table->year('deplome_year');
+            $table->string('deplome');
+            $table->integer('deplome_year');
             $table->integer('deplome_note');
             $table->text('file_path');
             $table->timestamps();

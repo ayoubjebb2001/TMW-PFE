@@ -28,12 +28,12 @@ class UserSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 30; $i++) {
             DB::table('users')->insert([
                 'prenom' => $faker->firstName,
                 'nom' => $faker->lastName,
                 'phone' => $faker->phoneNumber,
-                'CIN' => $faker->text(10),
+                'CIN' => $faker->unique()->text(10),
                 'email' => $faker->unique()->safeEmail,
                 'password' => Hash::make('password'),
                 'created_at' => now(),

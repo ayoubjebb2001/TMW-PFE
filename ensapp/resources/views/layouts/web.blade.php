@@ -22,37 +22,37 @@
         <ul class="text-xs my-2 ">
         
           <li class="cursor-pointer my-1 py-1 px-6 bg-sky-500 mx-6 rounded-lg text-left">
-            <a href="{{ route('dashboard') }}" class="font-semibold flex items-center justify-start">
+            <a href="{{ route('home') }}" class="font-semibold flex items-center justify-start">
               <i class="bx bx-pie-chart-alt-2 text-2xl mr-2 "></i>
               <span>Home</span>
             </a>
           </li>
+          @auth()
+            @if(auth()->user()->inscriptions)
+              @foreach(auth()->user()->inscriptions as $inscription)
+                @if ($inscription->status == 'Accepted')
+                    <li class="cursor-pointer my-1 py-1 px-6 hover:bg-sky-500 mx-6 rounded-lg transition ease-in-out duration-500">
+                        <a href="" class="font-semibold flex items-center justify-start">
+                            <i class="bx bx-book text-2xl mr-2"></i>
+                            <span class="">Modules</span>
+                        </a>
+                    </li>
+
+                    <li class="cursor-pointer my-1 py-1 px-6 hover:bg-sky-500 mx-6 rounded-lg transition ease-in-out duration-500">
+                        <a href="" class="font-semibold flex items-center justify-start">
+                            <i class="bx bx-book text-2xl mr-2"></i>
+                            <span class="">Calendar</span>
+                        </a>
+                    </li>
+                @endif
+              @endforeach
+            @endif
+          @endauth
+
 
           <li class="cursor-pointer my-1 py-1 px-6 hover:bg-sky-500 mx-6 rounded-lg transition ease-in-out duration-500">
-            <a href="" class="font-semibold flex items-center justify-start">
-              <i class="bx bx-user-check text-2xl mr-2 "></i>
-              <span>Inscriptions</span>
-            </a>
-          </li>
-          
-          <li class="cursor-pointer my-1 py-1 px-6 hover:bg-sky-500 mx-6 rounded-lg transition ease-in-out duration-500">
-            <a href="" class="font-semibold flex items-center justify-start">
-              <i class="bx bx-book text-2xl mr-2 "></i>
-              <span class="">Modules</span>
-            </a>
-          </li>
-          
-          <li class="cursor-pointer my-1 py-1 px-6 hover:bg-sky-500 mx-6 rounded-lg transition ease-in-out duration-500">
-            <a href="" class="font-semibold flex items-center justify-start">
-              <i class="bx bx-book text-2xl mr-2 "></i>
-              <span class="">calendar</span>
-            </a>
-          </li>
-
-          <li class="cursor-pointer my-1 py-1 px-6 hover:bg-sky-500 mx-6 rounded-lg transition ease-in-out duration-500">
-            <form action="{{ route('logout') }}" method="post">
+            <form action="{{ route('logout') }}" method="get">
               @csrf
-              method('GET')
               <button type="submit" class="text-red-700 font-semibold flex items-center justify-start">
                 <i class='bx bx-log-out text-2xl mr-2'></i>
                 <span class="">Logout</span>
@@ -73,7 +73,7 @@
         <nav class="w-full py-6 px-12 bg-sky-50 shadow-md">
           <ul class="flex items-center justify-between">
             <li>
-              <h1 class="text-4xl font-semibold">Dashboard</h1>
+              <h1 class="text-4xl font-semibold">Students platform - ENS</h1>
             </li>
 
             <li class="relative">

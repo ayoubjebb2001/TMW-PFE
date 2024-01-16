@@ -35,9 +35,7 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/home', function () {
-        return view('student.index');
-    })->name('home');
+    Route::get('/home', [StudentController::class,'index'])->name('home');
     Route::get('/logout', [userController::class,'logout'])->name('logout');
    
 });
