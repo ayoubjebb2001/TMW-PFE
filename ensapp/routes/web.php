@@ -32,13 +32,12 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [UserController::class,'authenticate'])->name('authenticate');
     Route::resource('student',StudentController::class);
 });
-
+Route::get('/home', [StudentController::class,'index'])->name('home')->middleware('auth','checkRole:student');
 Route::middleware('auth')->group(function () {
-
-    Route::get('/home', [StudentController::class,'index'])->name('home');
     Route::get('/logout', [userController::class,'logout'])->name('logout');
    
 });
+Route::resource('inscription', InscriptionController::class)->middleware('auth','checkRole:student');
 
 Route::middleware(['auth', 'checkRole:teacher,chef'])->group(function () {
 
@@ -48,7 +47,7 @@ Route::middleware(['auth', 'checkRole:teacher,chef'])->group(function () {
 
     Route::resource('module', ModuleController::class);
     Route::resource('course',CourseController::class);
-    Route::resource('inscription', InscriptionController::class);
+    //
     Route::resource('filiere', FiliereController::class);
     Route::resource('teacher', TeacherController::class);
 

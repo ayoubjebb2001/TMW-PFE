@@ -67,12 +67,12 @@
 
                 <div class="mb-4">
                     <label for="bac_note" class="block text-sm font-medium text-gray-600">Bac note:</label>
-                    <input type="number" min="10" max="20" name="bac_note" id="bac_note" class="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300" required>
+                    <input type="text"  name="bac_note" id="bac_note" class="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300" required>
                 </div>
 
                 <div class="mb-4">
                     <label for="deplome_note" class="block text-sm font-medium text-gray-600">Deplome note:</label>
-                    <input type="number" min="10" max="20" name="deplome_note" id="deplome_note" class="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300" required>
+                    <input type="text"  name="deplome_note" id="deplome_note" class="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300" required>
                 </div>
 
                 <div class="mb-4">

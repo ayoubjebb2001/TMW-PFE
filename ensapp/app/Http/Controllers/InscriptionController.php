@@ -63,8 +63,7 @@ class InscriptionController extends Controller
         $filePath = $file->storeAs('uploads', $fileName, 'public');
 
         $score = ($validatedData['bac_note'] + $validatedData['deplome_note'])/2;
-
-        Inscription::create([
+        $data = [
             'user_id' => $validatedData['user_id'],
             'filiere_id' => $validatedData['filiere'],
             'status' => 'Pinned',
@@ -73,10 +72,12 @@ class InscriptionController extends Controller
             'deplome_year' => $validatedData['deplome_year'],
             'deplome_note' => $validatedData['deplome_note'],
             'file_path' => 'storage/' . $filePath,
-            'score' => $score,
-        ]);
+            'score' => $score
+        ];
 
-        return redirect()->back()->with('success', 'Inscription registered successfully');
+        Inscription::create($data);
+
+        return redirect()->to('home')->with('success', 'Inscription registered successfully');
     }
 
     /**

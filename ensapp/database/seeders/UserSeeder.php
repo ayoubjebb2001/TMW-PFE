@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             'phone' => '0787654526',
             'CIN' => 'DDD101201',
             'email' => 'ais.devlop@gmail.com',
-            'password' => Hash::make('password'),
+            'password' => Hash::make("ais.devlop@gmail.com"),
             'created_at' => now(),
             'updated_at' => now(),
         ]);

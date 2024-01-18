@@ -6,7 +6,6 @@
 @section('content')
 <div class="px-12 py-6">
 
-
     <h1 class="text-3xl font-semibold">
         @auth
             Welcome @if(Auth::user()->nom and Auth::user()->prenom)

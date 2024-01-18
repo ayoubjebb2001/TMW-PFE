@@ -43,7 +43,7 @@ class UserController extends Controller
             } 
     
             if ($roleName && $roleName === 'student') {
-                return redirect('/')->with('message', 'You are now logged in!');
+                return redirect('/home')->with('message', 'You are now logged in!');
             }
         }
     

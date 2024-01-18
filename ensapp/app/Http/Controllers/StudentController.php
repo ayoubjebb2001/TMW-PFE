@@ -17,7 +17,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $inscriptions = Inscription::all();
+        $inscriptions = Inscription::all()->sortByDesc('created_at');
         return view('student.index', compact('inscriptions'));
     }
 
@@ -35,23 +35,23 @@ class StudentController extends Controller
     public function store(Request $request)
     {
         
-        $validatedData = $request->validate([
+/*         $validatedData = $request->validate([
             'lastname' => 'required|string',
             'name' => 'required|string',
             'phone' => 'required|string',
             'email' => 'required|email|unique:users,email',
             'CIN' => 'required|unique:users,cin',
             'password' => 'required|string',
-        ]);
+        ]); */
         
         // Create a new user
         $user = User::create([
-            'prenom' => $validatedData['name'],
-            'nom' => $validatedData['lastname'],
-            'phone' => $validatedData['phone'],
-            'email' => $validatedData['email'],
-            'CIN' => $validatedData['CIN'],
-            'password' => Hash::make($validatedData['password']),
+            'prenom' => $request->input('name'),
+            'nom' => $request->input('lastname'),
+            'phone' => $request->input('phone'),
+            'email' => $request->input('email'),
+            'CIN' => $request->input('CIN'),
+            'password' => Hash::make($request->input('Password')),
         ]);
 
         // Create a new student associated with the user
@@ -61,12 +61,14 @@ class StudentController extends Controller
             'role_name' => 'student',
         ]);
 
-        
-        // Login the new created user
-        Auth::login($user);
+        if($user){
+            Auth::login($user);
 
-        // Redirect or return a response
-        return redirect()->route('login')->with('success', 'Student registered successfully');
+            // Redirect or return a response
+            return redirect()->route('/home')->with('success', 'Student registered successfully');
+        }
+        // Login the new created user
+
     }
 
 

@@ -18,7 +18,8 @@ class Inscription extends Model
         'deplome', 
         'deplome_year', 
         'deplome_note', 
-        'file_path'
+        'file_path',
+        'score'
     ];
 
     public function user(): BelongsTo
