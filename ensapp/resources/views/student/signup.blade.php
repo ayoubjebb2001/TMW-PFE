@@ -9,6 +9,8 @@
 
     @csrf
 
+    <h1 class="font-bold text-4xl text-center py-6">Register</h1>
+
     <div class="mb-4">
         <label for="first_name" class="block text-gray-700 text-sm font-bold mb-2">First Name</label>
         <input type="text" name="name" id="name" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">

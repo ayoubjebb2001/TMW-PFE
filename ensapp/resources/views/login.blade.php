@@ -9,6 +9,8 @@
 
     @csrf
     
+    <h1 class="font-bold text-4xl text-center py-6">Login</h1>
+
     <div class="mb-4">
         <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
         <input type="email" name="email" id="email" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">

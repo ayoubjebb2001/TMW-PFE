@@ -7,6 +7,7 @@
 
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   @vite('resources/css/app.css')
 </head>

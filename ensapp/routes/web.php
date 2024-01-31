@@ -41,9 +41,7 @@ Route::resource('inscription', InscriptionController::class)->middleware('auth',
 
 Route::middleware(['auth', 'checkRole:teacher,chef'])->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [UserController::class, 'dash'])->name('dashboard');
 
     Route::resource('module', ModuleController::class);
     Route::resource('course',CourseController::class);

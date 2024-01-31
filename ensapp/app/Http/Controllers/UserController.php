@@ -3,10 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Module;
+use App\Models\Inscription;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+
+    public function dash(){
+        $teachers = User::whereHas('role', function ($query) {
+            $query->where('role_name', 'teacher');
+        })->count();
+
+        $students = User::whereHas('role', function ($query) {
+            $query->where('role_name', 'student');
+        })->count();
+
+        $inscriptions = Inscription::count();
+
+
+        $modules = Module::count();
+
+        return view("dashboard", compact('teachers', 'students', 'modules', 'inscriptions'));
+    }
 
     // Logout User
     public function logout(Request $request) {
