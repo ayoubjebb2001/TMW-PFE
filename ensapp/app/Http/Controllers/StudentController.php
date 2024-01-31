@@ -17,7 +17,8 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $inscriptions = Inscription::all()->sortByDesc('created_at');
+        $user = Auth::user();
+        $inscriptions = Inscription::where('user_id', $user->id)->get()->sortByDesc('created_at');
         return view('student.index', compact('inscriptions'));
     }
 

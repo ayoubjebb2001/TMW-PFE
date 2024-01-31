@@ -32,11 +32,14 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [UserController::class,'authenticate'])->name('authenticate');
     Route::resource('student',StudentController::class);
 });
-Route::get('/home', [StudentController::class,'index'])->name('home')->middleware('auth','checkRole:student');
+
+Route::get('/home', [StudentController::class,'index'])->name('home')->middleware('auth','checkRole:student, chef, teacher');
+
 Route::middleware('auth')->group(function () {
     Route::get('/logout', [userController::class,'logout'])->name('logout');
    
 });
+
 Route::resource('inscription', InscriptionController::class)->middleware('auth','checkRole:student');
 
 Route::middleware(['auth', 'checkRole:teacher,chef'])->group(function () {

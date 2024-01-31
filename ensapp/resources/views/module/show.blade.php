@@ -86,7 +86,7 @@
                         {{ $course->duration }}
                     </td>
                     <td class="px-6 py-4">
-                        <a href="/{{ $course->file_path }}" class="py-2 px-8 bg-slate-500 rounded-lg" target="_blank" rel="noopener noreferrer">
+                        <a href="/{{ $course->file_path }}" class="py-2 text-white px-8 bg-slate-500 rounded-lg" target="_blank" rel="noopener noreferrer">
                             Coure document
                         </a>
                     </td>

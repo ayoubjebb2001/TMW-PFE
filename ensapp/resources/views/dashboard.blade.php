@@ -58,7 +58,7 @@
   
 
         <div class="bg-white p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold mb-4">User Growth</h3>
+          <h3 class="text-xl font-semibold mb-4">Inscriptions Growth</h3>
           <canvas id="userGrowthChart" width="400" height="200"></canvas>
         </div>
   

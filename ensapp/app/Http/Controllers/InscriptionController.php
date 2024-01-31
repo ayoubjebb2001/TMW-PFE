@@ -21,7 +21,7 @@ class InscriptionController extends Controller
 
         if ($acceptedInscription) {
             $filiere = $acceptedInscription->filiere;
-            $modules = $filiere->modules()->orderBy('duration')->get();;
+            $modules = $filiere->modules()->orderBy('duration')->get();
 
             return view('inscription.index', compact('filiere', 'modules'));
         } else {
