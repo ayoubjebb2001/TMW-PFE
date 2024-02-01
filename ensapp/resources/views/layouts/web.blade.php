@@ -37,13 +37,6 @@
                             <span class="">Modules</span>
                         </a>
                     </li>
-
-                    <li class="cursor-pointer my-1 py-1 px-6 hover:bg-sky-500 mx-6 rounded-lg transition ease-in-out duration-500">
-                        <a href="" class="font-semibold flex items-center justify-start">
-                            <i class="bx bx-book text-2xl mr-2"></i>
-                            <span class="">Calendar</span>
-                        </a>
-                    </li>
                 @endif
               @endforeach
             @endif

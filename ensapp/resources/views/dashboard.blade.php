@@ -64,7 +64,7 @@
   
 
         <div class="bg-white p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold mb-4">Sales Distribution</h3>
+          <h3 class="text-xl font-semibold mb-4">Nombre de Modules/Semestre</h3>
           <canvas id="salesDistributionChart" width="400" height="200"></canvas>
         </div>
       </div>

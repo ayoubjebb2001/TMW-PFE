@@ -53,13 +53,13 @@
                   <span class="">Modules</span>
                 </a>
               </li>
-
+{{-- 
               <li class="cursor-pointer my-1 py-1 px-6 {{ request()->is('calandar') ? 'bg-orange-500' : 'hover:bg-orange-500' }} mx-6 rounded-lg transition ease-in-out duration-500">
                 <a href="" class="font-semibold flex items-center justify-start">
                   <i class="bx bx-book text-2xl mr-2 "></i>
                   <span class="">calendar</span>
                 </a>
-              </li>
+              </li> --}}
 
                 @if(auth()->user()->role->role_name == 'chef')
                     <li class="cursor-pointer my-1 py-1 px-6 {{ request()->is('inscription*') ? 'bg-orange-500' : 'hover:bg-orange-500' }} mx-6 rounded-lg transition ease-in-out duration-500">

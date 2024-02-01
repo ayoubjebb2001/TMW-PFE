@@ -114,14 +114,14 @@ class InscriptionController extends Controller
 
     public function list()
     {
+
         $filieres = Filiere::with(['inscriptions' => function ($query) {
-            $query->where('status', 'Pinned')->orderBy('score', 'desc');
+            $query->where('status', 'Pinned')->orWhere('status','Refused')->orderBy('score', 'desc')->limit(60);
         }])->get();
 
         $inscriptions = $filieres->flatMap(function ($filiere) {
             return $filiere->inscriptions;
         });
-
         return view('teacher.inscription.list', compact('filieres', 'inscriptions'));
     }
 
@@ -137,19 +137,33 @@ class InscriptionController extends Controller
 
         return view('teacher.inscription.student', compact('filieres', 'inscriptions'));
     }
+    public function action(Request $request){
+    if (auth::user()->role->role_name === 'chef'){
 
-    public function action(Request $request)
-    {
-        if (auth::user()->role->role_name === 'chef'){
+        // Get the filiere IDs associated with the selected inscriptions
+        $filiereIds = Inscription::whereIn('id', $request->input('inscriptions'))
+            ->pluck('filiere_id')
+            ->unique()
+            ->toArray();
 
-            $inscriptionIds = $request->input('inscriptions');
-    
-            Inscription::whereIn('id', $inscriptionIds)->update(['status' => 'Accepted']);
-    
-            Inscription::whereNotIn('id', $inscriptionIds)->update(['status' => 'Refused']);
-    
-            return redirect()->back()->with('success', 'Status updated successfully');
-            
+        // Check if accepting these inscriptions will exceed the capacity for any filiere
+        foreach ($filiereIds as $filiereId) {
+            $filiere = Filiere::findOrFail($filiereId);
+            $acceptedCount = Inscription::where('filiere_id', $filiereId)
+                ->where('status', 'Accepted')
+                ->count();
+
+            // Compare the accepted count with the filiere capacity
+            if ($acceptedCount > $filiere->capacity) {
+                return redirect()->back()->with('error', 'Accepting these inscriptions will exceed the capacity for one or more filieres.');
+            }
         }
+
+        // If capacity is not exceeded, update the inscription statuses
+        Inscription::whereIn('id', $request->input('inscriptions'))->update(['status' => 'Accepted']);
+        Inscription::whereNotIn('id', $request->input('inscriptions'))->update(['status' => 'Refused']);
+
+        return redirect()->back()->with('success', 'Status updated successfully');
+    }
     }
 }
