@@ -66,7 +66,7 @@ class StudentController extends Controller
             Auth::login($user);
 
             // Redirect or return a response
-            return redirect()->route('/home')->with('success', 'Student registered successfully');
+            return redirect()->route('home')->with('success', 'Student registered successfully');
         }
         // Login the new created user
 
