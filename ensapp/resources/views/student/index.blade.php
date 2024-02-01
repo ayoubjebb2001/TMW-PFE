@@ -5,6 +5,10 @@
  
 @section('content')
 <div class="px-12 py-6">
+    
+    <div class="pb-8 pt-4">
+        <img src="{{ asset('images/ens.jpg') }}" class="w-full h-[450px] rounded-lg" alt="">
+    </div>
 
     <h1 class="text-3xl font-semibold">
         @auth
@@ -13,9 +17,8 @@
             @endif
         @endauth
     </h1>
-    
 
-    <h4 class="mt-8 mb-2 text-xl">inscriptions list</h4>
+    <h4 class="mt-8 mb-2 text-xl">votre liste d'inscriptions</h4>
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     
