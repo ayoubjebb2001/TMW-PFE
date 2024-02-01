@@ -26,6 +26,7 @@ use App\Http\Controllers\DepartmentChifController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::redirect('/','/home');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [UserController::class,'login'])->name('login');
